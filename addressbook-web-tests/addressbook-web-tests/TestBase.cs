@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
+using System.Threading.Tasks;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -9,12 +10,11 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
 {
-    [TestFixture]
-    public class AccountAdditionTests
+    public class TestBase
     {
-        private IWebDriver driver;
+        protected IWebDriver driver;
         private StringBuilder verificationErrors;
-        private string baseURL;
+        protected string baseURL;
         private bool acceptNextAlert = true;
 
         [SetUp]
@@ -38,27 +38,61 @@ namespace WebAddressbookTests
             }
             Assert.AreEqual("", verificationErrors.ToString());
         }
-
-        [Test]
-        public void AccountAdditionTest()
+        protected void GoToHomePage()
         {
-            OpenHomePage();
-            Login("admin", "secret");
-            InitNewAccountAddition();
-            ContactData contact = new ContactData("Alisa");
-            contact.Lastname = "Moonny";
-            FillAccountForm(contact);
-            SubmitNewAccountAdditionHomePage();
-            driver.FindElement(By.LinkText("Logout")).Click();
+            driver.Navigate().GoToUrl(baseURL + "addressbook/");
+        }
+        protected void Login(AccountData account)
+        {
+            driver.FindElement(By.Name("user")).Clear();
+            driver.FindElement(By.Name("user")).SendKeys(account.Username);
+            driver.FindElement(By.Name("pass")).Clear();
+            driver.FindElement(By.Name("pass")).SendKeys(account.Password);
+            driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
+        }
+        protected void GoToGroupsPage()
+        {
+            driver.FindElement(By.LinkText("groups")).Click();
+        }
+        protected void InitNewGroupCreation()
+        {
+            driver.FindElement(By.Name("new")).Click();
         }
 
-        private void SubmitNewAccountAdditionHomePage()
+        protected void FillGroupForms(GroupData group)
         {
-            
+            driver.FindElement(By.Name("group_name")).Clear();
+            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
+            driver.FindElement(By.Name("group_header")).Clear();
+            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
+            driver.FindElement(By.Name("group_footer")).Clear();
+            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
+        }
+        protected void ReturnToGroupsPage()
+        {
+            driver.FindElement(By.LinkText("group page")).Click();
+        }
+
+        protected void SubmitGroupCreation()
+        {
+            driver.FindElement(By.Name("submit")).Click();
+        }
+        protected void RemoveGroup()
+        {
+            driver.FindElement(By.Name("delete")).Click();
+        }
+
+        protected void SelectGroup(int index)
+        {
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+        }
+        protected void SubmitNewContactAdditionHomePage()
+        {
+
             driver.FindElement(By.Name("submit")).Click();
         }
 
-        private void FillAccountForm(ContactData contact) 
+        protected void FillContactForm(ContactData contact)
         {
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
@@ -98,71 +132,10 @@ namespace WebAddressbookTests
             //driver.FindElement(By.Name("notes")).SendKeys(notes);
         }
 
-        private void InitNewAccountAddition()
+        protected void InitNewContactAddition()
         {
             driver.FindElement(By.LinkText("add new")).Click();
         }
 
-        private void Login(string username, string password)
-        {
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(username);
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(password);
-            driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
-        }
-
-        private void OpenHomePage()
-        {
-            driver.Navigate().GoToUrl(baseURL + "addressbook/");
-        }
-
-        private bool IsElementPresent(By by)
-        {
-            try
-            {
-                driver.FindElement(by);
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
-        }
-
-        private bool IsAlertPresent()
-        {
-            try
-            {
-                driver.SwitchTo().Alert();
-                return true;
-            }
-            catch (NoAlertPresentException)
-            {
-                return false;
-            }
-        }
-
-        private string CloseAlertAndGetItsText()
-        {
-            try
-            {
-                IAlert alert = driver.SwitchTo().Alert();
-                string alertText = alert.Text;
-                if (acceptNextAlert)
-                {
-                    alert.Accept();
-                }
-                else
-                {
-                    alert.Dismiss();
-                }
-                return alertText;
-            }
-            finally
-            {
-                acceptNextAlert = true;
-            }
-        }
     }
 }
