@@ -3,7 +3,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
-using OpenQA.Selenium;
+
 
 
 namespace WebAddressbookTests
@@ -15,13 +15,9 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemovalTest()
         {
-            GoToHomePage();
-            Login(new AccountData("admin", "secret"));
-            GoToGroupsPage();
-            SelectGroup(1);
-            RemoveGroup();
-            ReturnToGroupsPage();
-            driver.FindElement(By.LinkText("Logout")).Click();
+            app.Groups.Remove(1);
+            
+            
         }
         
        

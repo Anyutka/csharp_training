@@ -3,7 +3,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
-using OpenQA.Selenium;
 
 
 namespace WebAddressbookTests
@@ -16,18 +15,22 @@ namespace WebAddressbookTests
         [Test]
         public void GroupCreationTest()
         {
-            GoToHomePage();
-            Login(new AccountData("admin", "secret"));
-            GoToGroupsPage();
-            InitNewGroupCreation();
             GroupData group = new GroupData("qq");
             group.Header = "qq";
             group.Footer = "qq";
-            FillGroupForms(group);
-            SubmitGroupCreation();
-            ReturnToGroupsPage();
-            driver.FindElement(By.LinkText("Logout")).Click();
+
+            app.Groups.Create(group); 
+                           
         }
-        
+
+        [Test]
+        public void EmptyGroupCreationTest()
+        {
+            GroupData group = new GroupData("");
+            group.Header = "";
+            group.Footer = "";
+
+            app.Groups.Create(group);       
+        }
     }
 }

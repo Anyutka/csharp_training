@@ -1,19 +1,18 @@
 ﻿1>------ Build started: Project: addressbook-web-tests, Configuration: Debug Any CPU ------
-1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\ContactData.cs(17,24,17,31): warning CS0414: The field 'ContactData.address' is assigned but its value is never used
-1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\ContactData.cs(21,24,21,27): warning CS0414: The field 'ContactData.fax' is assigned but its value is never used
-1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\ContactData.cs(25,24,25,32): warning CS0414: The field 'ContactData.homepage' is assigned but its value is never used
-1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\ContactData.cs(26,24,26,32): warning CS0414: The field 'ContactData.address2' is assigned but its value is never used
-1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\ContactData.cs(28,24,28,29): warning CS0414: The field 'ContactData.notes' is assigned but its value is never used
-1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\ContactData.cs(22,24,22,29): warning CS0414: The field 'ContactData.email' is assigned but its value is never used
-1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\ContactData.cs(15,24,15,29): warning CS0414: The field 'ContactData.title' is assigned but its value is never used
-1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\ContactData.cs(16,24,16,31): warning CS0414: The field 'ContactData.company' is assigned but its value is never used
-1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\ContactData.cs(24,24,24,30): warning CS0414: The field 'ContactData.email3' is assigned but its value is never used
-1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\ContactData.cs(18,24,18,28): warning CS0414: The field 'ContactData.home' is assigned but its value is never used
-1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\ContactData.cs(19,24,19,30): warning CS0414: The field 'ContactData.mobile' is assigned but its value is never used
-1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\ContactData.cs(23,24,23,30): warning CS0414: The field 'ContactData.email2' is assigned but its value is never used
-1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\ContactData.cs(20,24,20,28): warning CS0414: The field 'ContactData.work' is assigned but its value is never used
-1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\ContactData.cs(27,24,27,29): warning CS0414: The field 'ContactData.phone' is assigned but its value is never used
-1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\ContactData.cs(14,24,14,32): warning CS0414: The field 'ContactData.nickname' is assigned but its value is never used
-1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\TestBase.cs(18,22,18,37): warning CS0414: The field 'TestBase.acceptNextAlert' is assigned but its value is never used
+1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\Model\ContactData.cs(25,24,25,32): warning CS0414: The field 'ContactData.homepage' is assigned but its value is never used
+1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\Model\ContactData.cs(20,24,20,28): warning CS0414: The field 'ContactData.work' is assigned but its value is never used
+1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\Model\ContactData.cs(15,24,15,29): warning CS0414: The field 'ContactData.title' is assigned but its value is never used
+1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\Model\ContactData.cs(21,24,21,27): warning CS0414: The field 'ContactData.fax' is assigned but its value is never used
+1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\Model\ContactData.cs(27,24,27,29): warning CS0414: The field 'ContactData.phone' is assigned but its value is never used
+1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\Model\ContactData.cs(24,24,24,30): warning CS0414: The field 'ContactData.email3' is assigned but its value is never used
+1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\Model\ContactData.cs(17,24,17,31): warning CS0414: The field 'ContactData.address' is assigned but its value is never used
+1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\Model\ContactData.cs(14,24,14,32): warning CS0414: The field 'ContactData.nickname' is assigned but its value is never used
+1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\Model\ContactData.cs(26,24,26,32): warning CS0414: The field 'ContactData.address2' is assigned but its value is never used
+1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\Model\ContactData.cs(23,24,23,30): warning CS0414: The field 'ContactData.email2' is assigned but its value is never used
+1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\Model\ContactData.cs(22,24,22,29): warning CS0414: The field 'ContactData.email' is assigned but its value is never used
+1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\Model\ContactData.cs(16,24,16,31): warning CS0414: The field 'ContactData.company' is assigned but its value is never used
+1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\Model\ContactData.cs(28,24,28,29): warning CS0414: The field 'ContactData.notes' is assigned but its value is never used
+1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\Model\ContactData.cs(19,24,19,30): warning CS0414: The field 'ContactData.mobile' is assigned but its value is never used
+1>C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\Model\ContactData.cs(18,24,18,28): warning CS0414: The field 'ContactData.home' is assigned but its value is never used
 1>  addressbook-web-tests -> C:\Users\anik\Source\Repos\csharp_training\addressbook-web-tests\addressbook-web-tests\bin\Debug\addressbook-web-tests.dll
 ========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========
