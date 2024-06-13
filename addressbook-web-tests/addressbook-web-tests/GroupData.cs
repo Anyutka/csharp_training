@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace WebAddressbookTests
+{
+     class GroupData
+    {
+        private string name;
+        private string header = "";
+        private string footer = "";
+        public GroupData(string name)
+        {
+            this.name = name;
+        }
+        
+        public string Name
+        {
+            get
+            {
+                return name; //возвращает
+            }
+            set
+            {
+                name = value; //присваивает
+            }
+        }
+        public string Header
+        {
+            get
+            {
+                return header; //возвращает
+            }
+            set
+            {
+                header=value; //присваивает
+            }
+        }
+        public string Footer
+        {
+            get
+            {
+                return footer; //возвращает
+            }
+            set
+            {
+                footer=value; //присваивает
+            }
+        }
+    }
+}
