@@ -14,9 +14,9 @@ namespace WebAddressbookTests
         [Test]
         public void ContactCreatinonTest()
         {
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            EnterContactNMS("Bulldog", "English", "Non-sporting dog");
+            app.Navigator.GoToHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
+            app.ContactHelper.EnterContactNMS("Bulldog", "English", "Non-sporting dog");
             ContactData contact = new ContactData("bulyk");
             contact.Title = "At home";
             contact.Company = "Dog-bulldog";
@@ -29,10 +29,10 @@ namespace WebAddressbookTests
             contact.Email2 = "bulyk1@dogik.com";
             contact.Email3 = "bulyk2@dogik.com";
             contact.Homepage = "http://all.bulldogs.com";
-            EnterContactData(contact);
-            SelectContactDatesGroup();
-            SubmitContact();
-            ReturnToContactsPage();
+            app.ContactHelper.EnterContactData(contact);
+            app.ContactHelper.SelectContactDatesGroup();
+            app.ContactHelper.SubmitContact();
+            app.ContactHelper.ReturnToContactsPage();
             
         }
 
