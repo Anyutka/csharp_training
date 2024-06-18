@@ -10,16 +10,21 @@ using OpenQA.Selenium;
 
 namespace WebAddressbookTests
 {
-
     public class ContactHelper : HelperBase
-    {
-        
-        public ContactHelper(IWebDriver driver) : base(driver) 
+    {      
+        public ContactHelper(ApplicationManager manager) : base(manager) 
+        {          
+        }
+        public ContactHelper Create(ContactData contact)
         {
-           
+                            EnterContactData(contact);
+                            SelectContactDatesGroup();
+                            SubmitContact();
+                            ReturnToContactsPage();
+            return this;
         }
 
-        public void EnterContactNMS(string name, string middle, string surname)
+        public ContactHelper EnterContactNMS(string name, string middle, string surname)
         {
             driver.FindElement(By.LinkText("add new")).Click();
             driver.FindElement(By.Name("firstname")).Click();
@@ -31,8 +36,9 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("lastname")).Click();
             driver.FindElement(By.Name("lastname")).Clear();
             driver.FindElement(By.Name("lastname")).SendKeys(surname);
+            return this;
         }
-        public void EnterContactData(ContactData contact)
+        public ContactHelper EnterContactData(ContactData contact)
         {
             driver.FindElement(By.Name("nickname")).Click();
             driver.FindElement(By.Name("nickname")).Clear();
@@ -72,8 +78,9 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("homepage")).SendKeys(contact.Homepage);
             driver.FindElement(By.Name("theform")).Click();
             driver.FindElement(By.Name("homepage")).Click();
+            return this;
         }
-        public void SelectContactDatesGroup()
+        public ContactHelper SelectContactDatesGroup()
         {
             driver.FindElement(By.Name("bday")).Click();
             new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText("15");
@@ -98,15 +105,17 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("ayear")).SendKeys("2022");
             driver.FindElement(By.Name("new_group")).Click();
             driver.FindElement(By.Name("new_group")).Click();
+            return this;
         }
-        public void SubmitContact()
+        public ContactHelper SubmitContact()
         {
-
             driver.FindElement(By.XPath("//div[@id='content']/form/input[20]")).Click();
+            return this;
         }
-        public void ReturnToContactsPage()
+        public ContactHelper ReturnToContactsPage()
         {
             driver.FindElement(By.LinkText("home page")).Click();
+            return this;
         }
     }
 }

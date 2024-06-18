@@ -10,13 +10,11 @@ namespace WebAddressbookTests
     [TestFixture]
     public class ContactCreationTests : TestBase
     {
-        
+
         [Test]
         public void ContactCreatinonTest()
         {
-            app.Navigator.GoToHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
-            app.ContactHelper.EnterContactNMS("Bulldog", "English", "Non-sporting dog");
+
             ContactData contact = new ContactData("bulyk");
             contact.Title = "At home";
             contact.Company = "Dog-bulldog";
@@ -29,27 +27,27 @@ namespace WebAddressbookTests
             contact.Email2 = "bulyk1@dogik.com";
             contact.Email3 = "bulyk2@dogik.com";
             contact.Homepage = "http://all.bulldogs.com";
-            app.ContactHelper.EnterContactData(contact);
-            app.ContactHelper.SelectContactDatesGroup();
-            app.ContactHelper.SubmitContact();
-            app.ContactHelper.ReturnToContactsPage();
-            
+            app.ContactHelper.EnterContactNMS("Bulldog", "English", "Non-sporting dog");
+            app.ContactHelper.Create(contact);
         }
+        [Test]
+        public void EmptyContactCreatinonTest()
+        {
 
-        
-        
-
-        
-
-        
-
-        
-
-        
-
-       
-       
-        
-        
+            ContactData contact = new ContactData("");
+            contact.Title = " ";
+            contact.Company = " ";
+            contact.Address = " ";
+            contact.Telhome = " ";
+            contact.Telmobile = " ";
+            contact.Telwork = " ";
+            contact.Telfax = " ";
+            contact.Email = " ";
+            contact.Email2 = " ";
+            contact.Email3 = " ";
+            contact.Homepage = " ";
+            app.ContactHelper.EnterContactNMS("", "", "");
+            app.ContactHelper.Create(contact);
+        }
     }
 }
