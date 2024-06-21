@@ -22,6 +22,7 @@ namespace WebAddressbookTests
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
 
+
         public ApplicationManager()
         {
             driver = new FirefoxDriver();
@@ -71,7 +72,7 @@ namespace WebAddressbookTests
             }
         }
 
-        public ContactHelper ContactHelper
+        public ContactHelper Contacts
         {
             get
             {

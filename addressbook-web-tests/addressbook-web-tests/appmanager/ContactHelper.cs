@@ -7,23 +7,30 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Internal;
 
 namespace WebAddressbookTests
 {
     public class ContactHelper : HelperBase
-    {      
-        public ContactHelper(ApplicationManager manager) : base(manager) 
-        {          
+    {
+        public ContactHelper(ApplicationManager manager) : base(manager)
+        {
         }
         public ContactHelper Create(ContactData contact)
         {
-                            EnterContactData(contact);
-                            SelectContactDatesGroup();
-                            SubmitContact();
-                            ReturnToContactsPage();
+            EnterContactData(contact);
+            SelectContactDatesGroup();
+            SubmitContact();
+            ReturnToContactsPage();
             return this;
         }
-
+        public ContactHelper Remove(int v)
+        {
+            manager.Contacts.
+            SelectContact();
+            RemoveContact();
+            return this;
+        }
         public ContactHelper EnterContactNMS(string name, string middle, string surname)
         {
             driver.FindElement(By.LinkText("add new")).Click();
@@ -117,5 +124,22 @@ namespace WebAddressbookTests
             driver.FindElement(By.LinkText("home page")).Click();
             return this;
         }
+        public ContactHelper SelectContact()
+        {
+            driver.FindElement(By.LinkText("home")).Click();
+            driver.FindElement(By.XPath("/html/body/div/div[4]/form[2]/table/tbody/tr[4]/td[1]/input")).Click();
+            return this;
+        }
+        public ContactHelper RemoveContact()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            return this;
+
+        }
+
+        
     }
-}
+
+    }
+
+

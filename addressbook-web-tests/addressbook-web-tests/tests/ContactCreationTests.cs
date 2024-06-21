@@ -27,8 +27,8 @@ namespace WebAddressbookTests
             contact.Email2 = "bulyk1@dogik.com";
             contact.Email3 = "bulyk2@dogik.com";
             contact.Homepage = "http://all.bulldogs.com";
-            app.ContactHelper.EnterContactNMS("Bulldog", "English", "Non-sporting dog");
-            app.ContactHelper.Create(contact);
+            app.Contacts.EnterContactNMS("Bulldog", "English", "Non-sporting dog");
+            app.Contacts.Create(contact);
         }
         [Test]
         public void EmptyContactCreatinonTest()
@@ -46,8 +46,8 @@ namespace WebAddressbookTests
             contact.Email2 = " ";
             contact.Email3 = " ";
             contact.Homepage = " ";
-            app.ContactHelper.EnterContactNMS("", "", "");
-            app.ContactHelper.Create(contact);
+            app.Contacts.EnterContactNMS("", "", "");
+            app.Contacts.Create(contact);
         }
     }
 }
