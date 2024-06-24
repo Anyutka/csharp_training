@@ -18,8 +18,10 @@ namespace WebAddressbookTests
         }
         public ContactHelper Create(ContactData contact)
         {
+            AddNewContact();
             ContactHelper contactHelper = EnterContactData(contact);
-            SelectContactDatesGroup();
+            SelectContactDates();
+            SelectGroupforContact();
             SubmitContact();
             ReturnToContactsPage();
             return this;
@@ -29,13 +31,12 @@ namespace WebAddressbookTests
             manager.Contacts.
             SelectContact();
             InitContactModification();
+            System.Threading.Thread.Sleep(3000);
             EnterContactData(contactnewData);
-            SelectContactDatesGroup();
-            SubmitGroupModification();
+            SelectContactDates();
+            SubmitContactModification();
             return this;
-        }
-
-        
+        }        
 
         public ContactHelper Remove(int v)
         {
@@ -44,11 +45,16 @@ namespace WebAddressbookTests
             RemoveContact();
             return this;
         }
-        
+
+        public ContactHelper AddNewContact()
+        {
+            driver.FindElement(By.LinkText("add new")).Click();
+            return this;
+        }
+
         public ContactHelper EnterContactData(ContactData contact)
 
         {
-            driver.FindElement(By.LinkText("add new")).Click();
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("firstname")).SendKeys(contact.Name);
@@ -94,11 +100,11 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("homepage")).Click();
             driver.FindElement(By.Name("homepage")).Clear();
             driver.FindElement(By.Name("homepage")).SendKeys(contact.Homepage);
-            //driver.FindElement(By.Name("theform")).Click();
             driver.FindElement(By.Name("homepage")).Click();
             return this;
-        }
-        public ContactHelper SelectContactDatesGroup()
+        }        
+
+        public ContactHelper SelectContactDates()
         {
             driver.FindElement(By.Name("bday")).Click();
             new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText("15");
@@ -120,11 +126,17 @@ namespace WebAddressbookTests
             new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText("July");
             driver.FindElement(By.Name("ayear")).Click();
             driver.FindElement(By.Name("ayear")).Clear();
-            driver.FindElement(By.Name("ayear")).SendKeys("2022");
+            driver.FindElement(By.Name("ayear")).SendKeys("2022");          
+            return this;
+        }
+
+        public ContactHelper SelectGroupforContact()
+        {
             driver.FindElement(By.Name("new_group")).Click();
             driver.FindElement(By.Name("new_group")).Click();
             return this;
         }
+
         public ContactHelper SubmitContact()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[20]")).Click();
@@ -147,7 +159,7 @@ namespace WebAddressbookTests
             return this;
 
         }
-        public ContactHelper SubmitGroupModification()
+        public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
             return this;
@@ -155,12 +167,10 @@ namespace WebAddressbookTests
 
         public ContactHelper InitContactModification()
         {
+            ///// /html/body/div/div[4]/form[2]/table/tbody/tr[5]/td[8]/a/img
             driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[4]/td[8]/a/img")).Click();
-            return this;
-            
-
+            return this;            
         }
-
     }
 
     }

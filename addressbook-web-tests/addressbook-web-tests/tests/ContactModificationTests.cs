@@ -13,8 +13,6 @@ namespace WebAddressbookTests
         [Test]
         public void ContactModificationTest()
         {
-            
-
             ContactData contactnewData = new ContactData();
             contactnewData.Name = "Pointer Shorthaired";
             contactnewData.Middle = "German";
@@ -31,8 +29,6 @@ namespace WebAddressbookTests
             contactnewData.Email2 = "pointic1@dogik.com";
             contactnewData.Email3 = "pointic2@dogik.com";
             contactnewData.Homepage = "http://all.pointers.com";
-             
-            //app.Contacts.EnterContactNMS("Pointer Shorthaired", "German", "Sporting dog");
             app.Contacts.Modify(1, contactnewData);
         }
     }

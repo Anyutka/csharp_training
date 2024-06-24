@@ -30,9 +30,9 @@ namespace WebAddressbookTests
             contact.Email2 = "bulyk1@dogik.com";
             contact.Email3 = "bulyk2@dogik.com";
             contact.Homepage = "http://all.bulldogs.com";
+
             app.Contacts.Create(contact);
-            //app.Contacts.EnterContactNMS("Bulldog", "English", "Non-sporting dog");
-            //ContactData contact = new ContactData("bulyk");
+            
            
         }
         [Test]
@@ -57,7 +57,7 @@ namespace WebAddressbookTests
             contact.Homepage = "";           
             app.Contacts.Create(contact);
 
-            //app.Contacts.EnterContactNMS("", "", "");
+            
         }
     }
 }
