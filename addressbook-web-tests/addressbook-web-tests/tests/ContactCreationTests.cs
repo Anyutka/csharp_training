@@ -12,10 +12,13 @@ namespace WebAddressbookTests
     {
 
         [Test]
-        public void ContactCreatinonTest()
+        public void ContactCreationTest()
         {
-
-            ContactData contact = new ContactData("bulyk");
+            ContactData contact = new ContactData();
+            contact.Name = "Bulldog";
+            contact.Middle = "English";
+            contact.Surname = "Non-sporting dog";
+            contact.Nickname = "bulyk";
             contact.Title = "At home";
             contact.Company = "Dog-bulldog";
             contact.Address = "Trees street 5-11";
@@ -27,27 +30,34 @@ namespace WebAddressbookTests
             contact.Email2 = "bulyk1@dogik.com";
             contact.Email3 = "bulyk2@dogik.com";
             contact.Homepage = "http://all.bulldogs.com";
-            app.Contacts.EnterContactNMS("Bulldog", "English", "Non-sporting dog");
             app.Contacts.Create(contact);
+            //app.Contacts.EnterContactNMS("Bulldog", "English", "Non-sporting dog");
+            //ContactData contact = new ContactData("bulyk");
+           
         }
         [Test]
         public void EmptyContactCreatinonTest()
         {
-
-            ContactData contact = new ContactData("");
-            contact.Title = " ";
-            contact.Company = " ";
-            contact.Address = " ";
-            contact.Telhome = " ";
-            contact.Telmobile = " ";
-            contact.Telwork = " ";
-            contact.Telfax = " ";
-            contact.Email = " ";
-            contact.Email2 = " ";
-            contact.Email3 = " ";
-            contact.Homepage = " ";
-            app.Contacts.EnterContactNMS("", "", "");
+            
+            ContactData contact = new ContactData();
+            contact.Name = "";
+            contact.Middle = "";
+            contact.Surname = "";
+            contact.Nickname = "";
+            contact.Title = "";
+            contact.Company = "";
+            contact.Address = "";
+            contact.Telhome = "";
+            contact.Telmobile = "";
+            contact.Telwork = "";
+            contact.Telfax = "";
+            contact.Email = "";
+            contact.Email2 = "";
+            contact.Email3 = "";
+            contact.Homepage = "";           
             app.Contacts.Create(contact);
+
+            //app.Contacts.EnterContactNMS("", "", "");
         }
     }
 }

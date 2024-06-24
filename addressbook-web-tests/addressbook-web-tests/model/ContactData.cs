@@ -8,7 +8,11 @@ namespace WebAddressbookTests
 {
    public class ContactData
     {
-        private string nickname;
+        
+        public string Name ="";
+        public string Middle =""; // без get set 
+        public string Surname = "";
+        private string nickname = "";
         private string title = "";
         private string company = "";
         private string address = "";
@@ -20,9 +24,8 @@ namespace WebAddressbookTests
         private string email2 = "";
         private string email3 = "";
         private string homepage = "";
-        public ContactData(string nickname)
+        public ContactData()
         {
-            this.nickname = nickname;
         }
         
         public string Nickname

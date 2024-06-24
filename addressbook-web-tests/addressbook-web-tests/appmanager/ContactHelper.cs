@@ -18,12 +18,25 @@ namespace WebAddressbookTests
         }
         public ContactHelper Create(ContactData contact)
         {
-            EnterContactData(contact);
+            ContactHelper contactHelper = EnterContactData(contact);
             SelectContactDatesGroup();
             SubmitContact();
             ReturnToContactsPage();
             return this;
         }
+        public ContactHelper Modify(int v, ContactData contactnewData)
+        {
+            manager.Contacts.
+            SelectContact();
+            InitContactModification();
+            EnterContactData(contactnewData);
+            SelectContactDatesGroup();
+            SubmitGroupModification();
+            return this;
+        }
+
+        
+
         public ContactHelper Remove(int v)
         {
             manager.Contacts.
@@ -31,22 +44,20 @@ namespace WebAddressbookTests
             RemoveContact();
             return this;
         }
-        public ContactHelper EnterContactNMS(string name, string middle, string surname)
+        
+        public ContactHelper EnterContactData(ContactData contact)
+
         {
             driver.FindElement(By.LinkText("add new")).Click();
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(name);
+            driver.FindElement(By.Name("firstname")).SendKeys(contact.Name);
             driver.FindElement(By.Name("middlename")).Click();
             driver.FindElement(By.Name("middlename")).Clear();
-            driver.FindElement(By.Name("middlename")).SendKeys(middle);
+            driver.FindElement(By.Name("middlename")).SendKeys(contact.Middle);
             driver.FindElement(By.Name("lastname")).Click();
             driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(surname);
-            return this;
-        }
-        public ContactHelper EnterContactData(ContactData contact)
-        {
+            driver.FindElement(By.Name("lastname")).SendKeys(contact.Surname);
             driver.FindElement(By.Name("nickname")).Click();
             driver.FindElement(By.Name("nickname")).Clear();
             driver.FindElement(By.Name("nickname")).SendKeys(contact.Nickname);
@@ -83,7 +94,7 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("homepage")).Click();
             driver.FindElement(By.Name("homepage")).Clear();
             driver.FindElement(By.Name("homepage")).SendKeys(contact.Homepage);
-            driver.FindElement(By.Name("theform")).Click();
+            //driver.FindElement(By.Name("theform")).Click();
             driver.FindElement(By.Name("homepage")).Click();
             return this;
         }
@@ -136,8 +147,20 @@ namespace WebAddressbookTests
             return this;
 
         }
+        public ContactHelper SubmitGroupModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
 
-        
+        public ContactHelper InitContactModification()
+        {
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[4]/td[8]/a/img")).Click();
+            return this;
+            
+
+        }
+
     }
 
     }
