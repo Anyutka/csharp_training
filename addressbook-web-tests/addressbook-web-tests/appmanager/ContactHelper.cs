@@ -9,6 +9,8 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Internal;
 using System.Diagnostics.Contracts;
+using System.Runtime.Remoting.Contexts;
+using System.Reflection;
 
 namespace WebAddressbookTests
 {
@@ -40,13 +42,12 @@ namespace WebAddressbookTests
         }        
 
         public ContactHelper Remove(int v)
-        {
+        {            
             manager.Contacts.
             SelectContact();
             RemoveContact();
             return this;
         }
-
         public ContactHelper AddNewContact()
         {
             driver.FindElement(By.LinkText("add new")).Click();
@@ -118,10 +119,22 @@ namespace WebAddressbookTests
             return this;
         }
         public ContactHelper SelectContact()
+            
         {
             driver.FindElement(By.LinkText("home")).Click();
-            driver.FindElement(By.XPath("/html/body/div/div[4]/form[2]/table/tbody/tr[4]/td[1]/input")).Click();
+            if (IsElementPresent(By.XPath("//*[.='Non-sporting dog']"))
+                && IsElementPresent(By.XPath("html/body/div/div[4]/form[2]/table/tbody/tr[5]/td[1]/input")))
+            {
+                driver.FindElement(By.XPath("html/body/div/div[4]/form[2]/table/tbody/tr[5]/td[1]/input")).Click();
+            }
+            else
+            {
+                driver.FindElement(By.XPath("/html/body/div/div[4]/form[2]/table/tbody/tr[4]/td[1]/input")).Click();
+            }
             return this;
+            ///html/body/div/div[4]/form[2]/table/tbody/tr[13]/td[2]
+            /////*[@id="34"]
+            ////html/body/div/div[4]/form[2]/table/tbody/tr[5]/td[1]/input
         }
         public ContactHelper RemoveContact()
         {

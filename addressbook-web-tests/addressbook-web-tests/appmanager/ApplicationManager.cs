@@ -8,6 +8,8 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Security.AccessControl;
+using System.Drawing.Text;
 
 
 namespace WebAddressbookTests
@@ -21,8 +23,9 @@ namespace WebAddressbookTests
         protected NavigationHelper navigator;
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
+        
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
-
+        
         private ApplicationManager()
         {
             driver = new FirefoxDriver();
@@ -31,7 +34,10 @@ namespace WebAddressbookTests
             navigator = new NavigationHelper(this, baseURL);
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
+
         }
+
         ~ApplicationManager()
         {
             try

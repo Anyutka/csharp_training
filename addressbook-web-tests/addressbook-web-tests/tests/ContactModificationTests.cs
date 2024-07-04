@@ -16,7 +16,7 @@ namespace WebAddressbookTests
             ContactData contactnewData = new ContactData();
             contactnewData.Name = null;
             contactnewData.Middle = null;
-            contactnewData.Surname = null;
+            contactnewData.Surname = "Sporting";
             contactnewData.Nickname = "pointic";
             contactnewData.Title = "At office";
             contactnewData.Company = "Dog-Shorthaired";

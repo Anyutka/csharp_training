@@ -11,19 +11,19 @@ using NUnit.Framework;
 
 namespace WebAddressbookTests
 {
-        public class GroupHelper : HelperBase
-    {           
-            public GroupHelper(ApplicationManager manager) : base(manager)
-            {               
-            }
+    public class GroupHelper : HelperBase
+    {
+        public GroupHelper(ApplicationManager manager) : base(manager)
+        {
+        }
         public GroupHelper Create(GroupData group)
         {
             manager.Navigator.GoToGroupsPage();
-                InitGroupCreation();
-                FillGroupForm(group);
-                SubmitGroupCreation();
-                ReturnToGroupsPage();
-            return this;       
+            InitGroupCreation();
+            FillGroupForm(group);
+            SubmitGroupCreation();
+            ReturnToGroupsPage();
+            return this;
         }
         public GroupHelper Modify(int p, GroupData groupnewData)
         {
@@ -33,10 +33,8 @@ namespace WebAddressbookTests
             FillGroupForm(groupnewData);
             SubmitGroupModification();
             ReturnToGroupsPage();
-            return this; 
+            return this;
         }
-
-        
 
         public GroupHelper Remove(int p)
         {
@@ -45,9 +43,8 @@ namespace WebAddressbookTests
             RemoveGroup();
             ReturnToGroupsPage();
             return this;
-
         }
-        
+
         public GroupHelper InitGroupCreation()
         {
             driver.FindElement(By.Name("new")).Click();
@@ -55,14 +52,11 @@ namespace WebAddressbookTests
         }
         public GroupHelper FillGroupForm(GroupData group)
         {
-            
             Type(By.Name("group_name"), group.Name);
             Type(By.Name("group_header"), group.Header);
             Type(By.Name("group_footer"), group.Footer);
-            
             return this;
         }
-       
 
         public GroupHelper SubmitGroupCreation()
         {
@@ -76,17 +70,33 @@ namespace WebAddressbookTests
         }
         public GroupHelper SelectGroup(int index)
         {
-            driver.FindElement(By.XPath("//div[@id='content']/form/span[" + index + "]/input")).Click();
+            if (IsElementPresent(By.XPath("//*[.='zzz']"))
+                && IsElementPresent(By.XPath("/html/body/div/div[4]/form/span[7]/input")))
+            {
+                driver.FindElement(By.XPath("/html/body/div/div[4]/form/span[7]/input")).Click();
+            }
+            else
+            {
+                driver.FindElement(By.XPath("//div[@id='content']/form/span[" + index + "]/input")).Click();                
+            }
             return this;
         }
         public GroupHelper RemoveGroup()
-        {
-            driver.FindElement(By.XPath("//div[@id='content']/form/input[5]")).Click();
+        {    
+            
+            if (IsElementPresent(By.Name("delete")))
+            {
+                driver.FindElement(By.XPath("//div[@id='content']/form/input[5]")).Click();
+            }
             return this;
         }
+    
         public GroupHelper SubmitGroupModification()
         {
-            driver.FindElement(By.Name("update")).Click();
+            if (IsElementPresent(By.Name("update")))
+            {
+                driver.FindElement(By.Name("update")).Click();
+            }                
             return this;
         }
 
@@ -95,7 +105,6 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("edit")).Click();
             return this;
         }
-
-
     }
+
 }
