@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,15 @@ namespace WebAddressbookTests
             contactnewData.Email2 = "pointic1@dogik.com";
             contactnewData.Email3 = "pointic2@dogik.com";
             contactnewData.Homepage = "http://all.pointers.com";
+            
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
             app.Contacts.Modify(1, contactnewData);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            Assert.AreEqual(oldContacts.Count, newContacts.Count);
+            Trace.WriteLine("old contacts count: " + oldContacts.Count,
+                "new contacts count: " + newContacts.Count);
         }
     }
 }

@@ -10,7 +10,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using System.Security.AccessControl;
 using System.Drawing.Text;
-
+using System.Diagnostics;
 
 namespace WebAddressbookTests
 {
@@ -35,6 +35,7 @@ namespace WebAddressbookTests
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
+           
 
         }
 

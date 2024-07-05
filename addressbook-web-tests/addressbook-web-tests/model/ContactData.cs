@@ -24,10 +24,17 @@ namespace WebAddressbookTests
         private string email2 = "";
         private string email3 = "";
         private string homepage = "";
+        private string text;
+
         public ContactData()
         {
         }
-        
+
+        public ContactData(string text)
+        {
+            this.text = text;
+        }
+
         public string Nickname
         {
             get

@@ -3,6 +3,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 
 namespace WebAddressbookTests
@@ -17,8 +19,15 @@ namespace WebAddressbookTests
             
             GroupData group = new GroupData("aaa");
             group.Header = "ddd";
-            group.Footer = "fff";
-            app.Groups.Create(group);
+            group.Footer = "fff";            
+
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
+            app.Groups.Create(group);            
+            
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+           Assert.AreEqual(oldGroups.Count +1, newGroups.Count);
+           Trace.WriteLine("old groups count: " + oldGroups.Count, "new groups count: " + newGroups.Count);
         }
         [Test]
         public void EmptyGroupCreationTest()
@@ -27,8 +36,31 @@ namespace WebAddressbookTests
             GroupData group = new GroupData("");
             group.Header = "";
             group.Footer = "";
+            
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
             app.Groups.Create(group);
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+            Trace.WriteLine("old groups count: " + oldGroups.Count, "new groups count: " + newGroups.Count);
+        }
+        [Test]
+        public void BadNameGroupCreationTest()
+        {
+
+            GroupData group = new GroupData("a'a");
+            group.Header = "";
+            group.Footer = "";
+            
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
+            app.Groups.Create(group);
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
+            Trace.WriteLine("old groups count: " + oldGroups.Count, "new groups count: " + newGroups.Count);
         }
     }
+    }
 
-}

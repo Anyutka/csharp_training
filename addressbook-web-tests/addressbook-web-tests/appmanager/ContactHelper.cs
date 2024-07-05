@@ -39,10 +39,10 @@ namespace WebAddressbookTests
             SelectContactDates();
             SubmitContactModification();
             return this;
-        }        
+        }
 
         public ContactHelper Remove(int v)
-        {            
+        {
             manager.Contacts.
             SelectContact();
             RemoveContact();
@@ -57,7 +57,7 @@ namespace WebAddressbookTests
         public ContactHelper EnterContactData(ContactData contact)
 
         {
-            Type (By.Name("firstname"), contact.Name);
+            Type(By.Name("firstname"), contact.Name);
             Type(By.Name("middlename"), contact.Middle);
             Type(By.Name("lastname"), contact.Surname);
             Type(By.Name("nickname"), contact.Nickname);
@@ -97,7 +97,7 @@ namespace WebAddressbookTests
             new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText("July");
             driver.FindElement(By.Name("ayear")).Click();
             driver.FindElement(By.Name("ayear")).Clear();
-            driver.FindElement(By.Name("ayear")).SendKeys("2022");          
+            driver.FindElement(By.Name("ayear")).SendKeys("2022");
             return this;
         }
 
@@ -119,7 +119,7 @@ namespace WebAddressbookTests
             return this;
         }
         public ContactHelper SelectContact()
-            
+
         {
             driver.FindElement(By.LinkText("home")).Click();
             if (IsElementPresent(By.XPath("//*[.='Non-sporting dog']"))
@@ -132,9 +132,7 @@ namespace WebAddressbookTests
                 driver.FindElement(By.XPath("/html/body/div/div[4]/form[2]/table/tbody/tr[4]/td[1]/input")).Click();
             }
             return this;
-            ///html/body/div/div[4]/form[2]/table/tbody/tr[13]/td[2]
-            /////*[@id="34"]
-            ////html/body/div/div[4]/form[2]/table/tbody/tr[5]/td[1]/input
+
         }
         public ContactHelper RemoveContact()
         {
@@ -151,10 +149,24 @@ namespace WebAddressbookTests
         public ContactHelper InitContactModification()
         {
             driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[4]/td[8]/a/img")).Click();
-            return this;            
+            return this;
+        }
+
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.GoToHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("[name=entry]"));
+            foreach (IWebElement element in elements)
+            {
+                contacts.Add(new ContactData(element.Text));
+            }
+            return contacts;
         }
     }
-
     }
 
+
+
+    
 

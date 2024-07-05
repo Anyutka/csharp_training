@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -30,10 +32,16 @@ namespace WebAddressbookTests
             contact.Email2 = "bulyk1@dogik.com";
             contact.Email3 = "bulyk2@dogik.com";
             contact.Homepage = "http://all.bulldogs.com";
+            
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
 
             app.Contacts.Create(contact);
-            
            
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
+            Trace.WriteLine("old contacts count: " + oldContacts.Count, 
+                "new contacts count: " + newContacts.Count);
+
         }
         [Test]
         public void EmptyContactCreatinonTest()
@@ -55,9 +63,46 @@ namespace WebAddressbookTests
             contact.Email2 = "";
             contact.Email3 = "";
             contact.Homepage = "";           
+            
+
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
             app.Contacts.Create(contact);
 
-            
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
+            Trace.WriteLine("old contacts count: " + oldContacts.Count,
+                "new contacts count: " + newContacts.Count);
+        }
+        [Test]
+        public void BadNameContactCreationTest()
+        {
+            ContactData contact = new ContactData();
+            contact.Name = "a'''a";
+            contact.Middle = "English";
+            contact.Surname = "Non-sporting dog";
+            contact.Nickname = "bulyk";
+            contact.Title = "At home";
+            contact.Company = "Dog-bulldog";
+            contact.Address = "Trees street 5-11";
+            contact.Telhome = "555555";
+            contact.Telmobile = "1111111";
+            contact.Telwork = "2222222";
+            contact.Telfax = "3333333";
+            contact.Email = "bulyk@dogik.com";
+            contact.Email2 = "bulyk1@dogik.com";
+            contact.Email3 = "bulyk2@dogik.com";
+            contact.Homepage = "http://all.bulldogs.com";
+
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
+            app.Contacts.Create(contact);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
+            Trace.WriteLine("old contacts count: " + oldContacts.Count,
+                "new contacts count: " + newContacts.Count);
+
         }
     }
 }
