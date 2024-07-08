@@ -19,7 +19,13 @@ namespace WebAddressbookTests
             groupnewData.Footer = null;
             
             List<GroupData> oldGroups = app.Groups.GetGroupList();
+            //prepare test situation
+            app.Groups.CreateGroup(group);
+            //action
             app.Groups.Modify(1, groupnewData);
+
+            //verification
+            //Assert.IsTrue(IsGroupPresentIn(group));
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
             Assert.AreEqual(oldGroups.Count, newGroups.Count);
