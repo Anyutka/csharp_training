@@ -16,7 +16,12 @@ namespace WebAddressbookTests
         [Test]
         public void ContactRemovalTest()
         {
-            
+            ContactData contact = new ContactData();
+            contact.Name = "Bulldog";
+            contact.Middle = "English";
+            contact.Surname = "Non-sporting dog";
+            contact.Nickname = "bulyk";
+            app.Contacts.VerifyContactPresent(contact);
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
 

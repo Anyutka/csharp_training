@@ -27,56 +27,42 @@ namespace WebAddressbookTests
             ReturnToGroupsPage();
             return this;
         }
+        
         public GroupHelper Modify(int p, GroupData groupnewData)
         {
-            manager.Navigator.GoToGroupsPage();
-            SelectGroup(p);
-            InitGroupModification();
-            FillGroupForm(groupnewData);
-            SubmitGroupModification();
-            ReturnToGroupsPage();
+            manager.Navigator.GoToGroupsPage();            
+            ModifyGroup(1, groupnewData);
             return this;
         }
-
-            public void ModifyGroup(int p, GroupData groupnewData, GroupData group)
+        public void VerifyGroupPresent(GroupData group)
         {
             manager.Navigator.GoToGroupsPage();
-            if (IsGroupPresentIn())
+
+            if (!IsGroupPresentIn())
             {
-                if (IsGroupPresentIn())
-                {
-                    return;
-                }
                 CreateGroup(group);
             }
-            SelectGroup(p);
-            InitGroupModification();
-            FillGroupForm(groupnewData);
-            SubmitGroupModification();
-            ReturnToGroupsPage();
         }
-
-
         public bool IsGroupPresentIn()
         {
             return IsElementPresent(By.Name("selected[]"));
         }
-        
+
         public void CreateGroup(GroupData group)
         {
-           InitGroupCreation();
-           FillGroupForm(group);
-           SubmitGroupCreation();
-           ReturnToGroupsPage();
-       }
-       //public void ModifyGroup(int p, GroupData groupnewData)
-        //{
-          //SelectGroup(p);
-          //InitGroupModification();
-          //FillGroupForm(groupnewData);
-          //SubmitGroupModification();
-          //ReturnToGroupsPage();
-      // }
+            InitGroupCreation();
+            FillGroupForm(group);
+            SubmitGroupCreation();
+            ReturnToGroupsPage();
+        }
+        public void ModifyGroup(int p, GroupData groupnewData)
+        {
+            SelectGroup(p);
+            InitGroupModification();
+            FillGroupForm(groupnewData);
+            SubmitGroupModification();
+            ReturnToGroupsPage();
+        }
 
         public GroupHelper Remove(int p)
         {

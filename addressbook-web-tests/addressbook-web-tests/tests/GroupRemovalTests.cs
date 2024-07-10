@@ -17,6 +17,11 @@ namespace WebAddressbookTests
         [Test]
         public void  GroupRemovalTest()
         {
+            GroupData group = new GroupData("zzz");
+            group.Header = "zzz";
+            group.Footer = "zzz";
+
+            app.Groups.VerifyGroupPresent(group);
             List<GroupData> oldGroups = app.Groups.GetGroupList();
             app.Groups.Remove(1);
        

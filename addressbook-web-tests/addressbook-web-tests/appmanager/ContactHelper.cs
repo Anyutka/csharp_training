@@ -40,6 +40,21 @@ namespace WebAddressbookTests
             SubmitContactModification();
             return this;
         }
+        public void VerifyContactPresent(ContactData contact)
+        {
+            manager.Navigator.GoToHomePage();
+
+            if (!IsContactPresentIn())
+            {
+                Create(contact);
+            }
+        }
+
+        public bool IsContactPresentIn()
+        {
+            return IsElementPresent(By.Name("entry"));
+        }
+
 
         public ContactHelper Remove(int v)
         {
@@ -48,6 +63,7 @@ namespace WebAddressbookTests
             RemoveContact();
             return this;
         }
+
         public ContactHelper AddNewContact()
         {
             driver.FindElement(By.LinkText("add new")).Click();
@@ -119,20 +135,19 @@ namespace WebAddressbookTests
             return this;
         }
         public ContactHelper SelectContact()
+        {    
+           driver.FindElement(By.LinkText("home")).Click();
 
+         if (IsElementPresent(By.XPath("//td[text()='Sporting']"))
+                   && IsElementPresent(By.XPath("//td[text()='Bulldog']")))
+            {
+                driver.FindElement(By.XPath("/html/body/div/div[4]/form[2]/table/tbody/tr[3]/td[1]/input")).Click();
+            }          
+         else
         {
-            driver.FindElement(By.LinkText("home")).Click();
-            if (IsElementPresent(By.XPath("//*[.='Non-sporting dog']"))
-                && IsElementPresent(By.XPath("html/body/div/div[4]/form[2]/table/tbody/tr[5]/td[1]/input")))
-            {
-                driver.FindElement(By.XPath("html/body/div/div[4]/form[2]/table/tbody/tr[5]/td[1]/input")).Click();
-            }
-            else
-            {
-                driver.FindElement(By.XPath("/html/body/div/div[4]/form[2]/table/tbody/tr[4]/td[1]/input")).Click();
-            }
-            return this;
-
+        driver.FindElement(By.XPath("/html/body/div/div[4]/form[2]/table/tbody/tr[3]/td[1]/input")).Click();
+        }
+        return this;
         }
         public ContactHelper RemoveContact()
         {
@@ -148,8 +163,8 @@ namespace WebAddressbookTests
 
         public ContactHelper InitContactModification()
         {
-            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[4]/td[8]/a/img")).Click();
-            return this;
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[3]/td[8]/a/img")).Click();
+            return this;           
         }
 
         public List<ContactData> GetContactList()

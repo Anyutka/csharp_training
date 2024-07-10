@@ -14,6 +14,12 @@ namespace WebAddressbookTests
         [Test]
         public void ContactModificationTest()
         {
+            ContactData contact = new ContactData();
+            contact.Name = "Bulldog";
+            contact.Middle = "English";
+            contact.Surname = "Non-sporting dog";
+            contact.Nickname = "bulyk";
+
             ContactData contactnewData = new ContactData();
             contactnewData.Name = null;
             contactnewData.Middle = null;
@@ -31,6 +37,8 @@ namespace WebAddressbookTests
             contactnewData.Email3 = "pointic2@dogik.com";
             contactnewData.Homepage = "http://all.pointers.com";
             
+            app.Contacts.VerifyContactPresent(contact);
+
             List<ContactData> oldContacts = app.Contacts.GetContactList();
 
             app.Contacts.Modify(1, contactnewData);
@@ -40,5 +48,7 @@ namespace WebAddressbookTests
             Trace.WriteLine("old contacts count: " + oldContacts.Count,
                 "new contacts count: " + newContacts.Count);
         }
+
+        
     }
 }
