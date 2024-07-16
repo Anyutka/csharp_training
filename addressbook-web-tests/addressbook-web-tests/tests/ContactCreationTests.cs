@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -38,9 +39,13 @@ namespace WebAddressbookTests
             app.Contacts.Create(contact);
            
             List<ContactData> newContacts = app.Contacts.GetContactList();
-            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
-            Trace.WriteLine("old contacts count: " + oldContacts.Count, 
-                "new contacts count: " + newContacts.Count);
+
+            oldContacts.Add(contact);
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
+            Trace.WriteLine("old contacts count: " + oldContacts,
+                "new contacts count: " + newContacts);
 
         }
         [Test]
@@ -70,9 +75,12 @@ namespace WebAddressbookTests
             app.Contacts.Create(contact);
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
-            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
-            Trace.WriteLine("old contacts count: " + oldContacts.Count,
-                "new contacts count: " + newContacts.Count);
+            oldContacts.Add(contact);
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
+            Trace.WriteLine("old contacts count: " + oldContacts,
+                "new contacts count: " + newContacts);
         }
         [Test]
         public void BadNameContactCreationTest()
@@ -99,9 +107,13 @@ namespace WebAddressbookTests
             app.Contacts.Create(contact);
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
-            Assert.AreEqual(oldContacts.Count + 1, newContacts.Count);
-            Trace.WriteLine("old contacts count: " + oldContacts.Count,
-                "new contacts count: " + newContacts.Count);
+
+            oldContacts.Add(contact);
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
+            Trace.WriteLine("old contacts count: " + oldContacts,
+                "new contacts count: " + newContacts);
 
         }
     }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
@@ -21,7 +23,7 @@ namespace WebAddressbookTests
             contact.Nickname = "bulyk";
 
             ContactData contactnewData = new ContactData();
-            contactnewData.Name = null;
+            contactnewData.Name = "Labrador";
             contactnewData.Middle = null;
             contactnewData.Surname = "Sporting";
             contactnewData.Nickname = "pointic";
@@ -41,12 +43,17 @@ namespace WebAddressbookTests
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
 
-            app.Contacts.Modify(1, contactnewData);
+            app.Contacts.Modify(0, contactnewData);
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
-            Assert.AreEqual(oldContacts.Count, newContacts.Count);
-            Trace.WriteLine("old contacts count: " + oldContacts.Count,
-                "new contacts count: " + newContacts.Count);
+
+
+            oldContacts[0].Name = contactnewData.Name;
+            oldContacts[0].Surname = contactnewData.Surname;
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
+            Trace.WriteLine("old counts count: " + oldContacts, "new contacts count: " + newContacts);
         }
 
         

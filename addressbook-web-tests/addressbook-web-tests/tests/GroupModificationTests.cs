@@ -10,9 +10,7 @@ namespace WebAddressbookTests
 {
     [TestFixture]
     public class GroupModificationTests : AuthTestBase
-    {
-           
-        
+    {       
         
         [Test]
         public void GroupModificationTest()
@@ -28,10 +26,16 @@ namespace WebAddressbookTests
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
-            app.Groups.Modify(1, groupnewData);
+            app.Groups.Modify(0, groupnewData);
+
+            Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount());
+
             List<GroupData> newGroups = app.Groups.GetGroupList();
-            Assert.AreEqual(oldGroups.Count, newGroups.Count);
-            Trace.WriteLine("old groups count: " + oldGroups.Count, "new groups count: " + newGroups.Count);
+            oldGroups[0].Name = groupnewData.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
+            Trace.WriteLine("old groups count: " + oldGroups, "new groups count: " + newGroups);
         }
     }
 }

@@ -25,9 +25,16 @@ namespace WebAddressbookTests
 
             app.Groups.Create(group);            
             
+            
+            Assert.AreEqual(oldGroups.Count +1, app.Groups.GetGroupCount());
+
             List<GroupData> newGroups = app.Groups.GetGroupList();
-           Assert.AreEqual(oldGroups.Count +1, newGroups.Count);
-           Trace.WriteLine("old groups count: " + oldGroups.Count, "new groups count: " + newGroups.Count);
+
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
+           Assert.AreEqual(oldGroups, newGroups);
+           Trace.WriteLine("old groups count: " + oldGroups, "new groups count: " + newGroups);
         }
         [Test]
         public void EmptyGroupCreationTest()
@@ -40,10 +47,15 @@ namespace WebAddressbookTests
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
             app.Groups.Create(group);
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
-            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
-            Trace.WriteLine("old groups count: " + oldGroups.Count, "new groups count: " + newGroups.Count);
+
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
+            Trace.WriteLine("old groups count: " + oldGroups, "new groups count: " + newGroups);
         }
         [Test]
         public void BadNameGroupCreationTest()
@@ -56,10 +68,15 @@ namespace WebAddressbookTests
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
             app.Groups.Create(group);
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
-            Assert.AreEqual(oldGroups.Count + 1, newGroups.Count);
-            Trace.WriteLine("old groups count: " + oldGroups.Count, "new groups count: " + newGroups.Count);
+
+            oldGroups.Add(group);
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
+            Trace.WriteLine("old groups count: " + oldGroups, "new groups count: " + newGroups);
         }
     }
     }
