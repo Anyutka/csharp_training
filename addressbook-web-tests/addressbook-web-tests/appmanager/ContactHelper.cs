@@ -135,19 +135,19 @@ namespace WebAddressbookTests
             return this;
         }
         public ContactHelper SelectContact()
-        {    
-           driver.FindElement(By.LinkText("home")).Click();
+        {
+            driver.FindElement(By.LinkText("home")).Click();
 
-         if (IsElementPresent(By.XPath("//td[text()='Sporting']"))
-                   && IsElementPresent(By.XPath("//td[text()='Bulldog']")))
+            if (IsElementPresent(By.XPath("//td[text()='Sporting']"))
+                      && IsElementPresent(By.XPath("//td[text()='Bulldog']")))
             {
                 driver.FindElement(By.XPath("/html/body/div/div[4]/form[2]/table/tbody/tr[3]/td[1]/input")).Click();
-            }          
-         else
-        {
-        driver.FindElement(By.XPath("/html/body/div/div[4]/form[2]/table/tbody/tr[3]/td[1]/input")).Click();
-        }
-        return this;
+            }
+            else
+            {
+                driver.FindElement(By.XPath("/html/body/div/div[4]/form[2]/table/tbody/tr[3]/td[1]/input")).Click();
+            }
+            return this;
         }
         public ContactHelper RemoveContact()
         {
@@ -164,22 +164,39 @@ namespace WebAddressbookTests
         public ContactHelper InitContactModification()
         {
             driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[3]/td[8]/a/img")).Click();
-            return this;           
+            return this;
         }
 
         public List<ContactData> GetContactList()
         {
             List<ContactData> contacts = new List<ContactData>();
             manager.Navigator.GoToHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("[name=entry]"));
-            foreach (IWebElement element in elements)
+
+            IList<IWebElement> rows = driver.FindElements(By.TagName("tr"));
+            
+            foreach (IWebElement row in rows) 
+
             {
-                contacts.Add(new ContactData(element.Text));
+                IList<IWebElement> cells= row.FindElements(By.TagName("td"));
+            if (cells.Count > 0) 
+                {
+                    string name = cells[2].Text;
+                    string surname = cells[1].Text;
+                    ContactData contact = new ContactData();
+
+                    contact.Name = name;
+                    contact.Surname = surname;  
+
+                    contacts.Add(contact);
+                }
+
             }
+
             return contacts;
+
         }
     }
-    }
+}
 
 
 

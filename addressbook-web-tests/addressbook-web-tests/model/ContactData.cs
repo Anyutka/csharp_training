@@ -24,15 +24,12 @@ namespace WebAddressbookTests
         private string email2 = "";
         private string email3 = "";
         private string homepage = "";
-        private string text;
+        
 
         public ContactData()
         {
         }
-        public ContactData(string text)
-        {
-            this.text = text;
-        }
+        
         public bool Equals(ContactData other)
         {
             if (Object.ReferenceEquals(other, null))
@@ -64,7 +61,7 @@ namespace WebAddressbookTests
 
         public override string ToString()
         {
-            return "name= + surname=" + Name + Surname;
+            return "name=" +Name+ ", surname=" +Surname;
         }
 
         public string Nickname
