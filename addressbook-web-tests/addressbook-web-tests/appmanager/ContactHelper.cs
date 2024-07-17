@@ -137,16 +137,9 @@ namespace WebAddressbookTests
         public ContactHelper SelectContact()
         {
             driver.FindElement(By.LinkText("home")).Click();
+            // driver.FindElement(By.XPath("/html/body/div/div[4]/form[2]/table/tbody/tr[3]/td[1]/input")).Click();
+            driver.FindElement(By.XPath("/html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input")).Click();
 
-            if (IsElementPresent(By.XPath("//td[text()='Sporting']"))
-                      && IsElementPresent(By.XPath("//td[text()='Bulldog']")))
-            {
-                driver.FindElement(By.XPath("/html/body/div/div[4]/form[2]/table/tbody/tr[3]/td[1]/input")).Click();
-            }
-            else
-            {
-                driver.FindElement(By.XPath("/html/body/div/div[4]/form[2]/table/tbody/tr[3]/td[1]/input")).Click();
-            }
             return this;
         }
         public ContactHelper RemoveContact()
@@ -163,7 +156,8 @@ namespace WebAddressbookTests
 
         public ContactHelper InitContactModification()
         {
-            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[3]/td[8]/a/img")).Click();
+            
+            driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();     
             return this;
         }
 
@@ -191,7 +185,6 @@ namespace WebAddressbookTests
                 }
 
             }
-
             return contacts;
 
         }

@@ -49,21 +49,19 @@ namespace WebAddressbookTests
         {
             return Name.GetHashCode() + Surname.GetHashCode();
         }
-
+        
+        public override string ToString()
+        {
+            return "name=" +Name+ ", surname=" +Surname;
+        }
         public int CompareTo(ContactData other)
         {
             if (Object.ReferenceEquals(other, null))
             {
                 return 1;
             }
-            return Name.CompareTo(other.Name)  + Surname.CompareTo(other.Surname);
+            return Name.CompareTo(other.Name) + Surname.CompareTo(other.Surname);
         }
-
-        public override string ToString()
-        {
-            return "name=" +Name+ ", surname=" +Surname;
-        }
-
         public string Nickname
         {
             get

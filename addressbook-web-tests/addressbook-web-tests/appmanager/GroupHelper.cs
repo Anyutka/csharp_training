@@ -99,15 +99,8 @@ namespace WebAddressbookTests
         }
         public GroupHelper SelectGroup(int index)
         {
-            if (IsElementPresent(By.XPath("//*[.='zzz']"))
-                && IsElementPresent(By.XPath("/html/body/div/div[4]/form/span[7]/input")))
-            {
-                driver.FindElement(By.XPath("/html/body/div/div[4]/form/span[7]/input")).Click();
-            }
-            else
-            {
-                driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
-            }
+            //driver.FindElement(By.XPath("(//input[@name='selected[]'])["+ (index+1)+ "]")).Click();
+            driver.FindElement(By.Name("selected[]")).Click();
             return this;
         }
         public GroupHelper RemoveGroup()
