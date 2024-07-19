@@ -31,7 +31,7 @@ namespace WebAddressbookTests
         public GroupHelper Modify(int p, GroupData groupnewData)
         {
             manager.Navigator.GoToGroupsPage();
-            ModifyGroup(1, groupnewData);
+            ModifyGroup(0, groupnewData);
             return this;
         }
         public void VerifyGroupPresent(GroupData group)
@@ -99,8 +99,8 @@ namespace WebAddressbookTests
         }
         public GroupHelper SelectGroup(int index)
         {
-            //driver.FindElement(By.XPath("(//input[@name='selected[]'])["+ (index+1)+ "]")).Click();
-            driver.FindElement(By.Name("selected[]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])["+ (index+1)+ "]")).Click();
+            //driver.FindElement(By.Name("selected[]")).Click();
             return this;
         }
         public GroupHelper RemoveGroup()

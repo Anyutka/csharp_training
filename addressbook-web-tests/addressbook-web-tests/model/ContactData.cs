@@ -60,7 +60,16 @@ namespace WebAddressbookTests
             {
                 return 1;
             }
-            return Name.CompareTo(other.Name) + Surname.CompareTo(other.Surname);
+            
+            if(Surname.Equals(other.Surname))
+            {
+                return Name.CompareTo(other.Name);
+            }
+            else 
+            {
+                return Surname.CompareTo(other.Surname);
+            }           
+                         
         }
         public string Nickname
         {

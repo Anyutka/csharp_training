@@ -43,18 +43,18 @@ namespace WebAddressbookTests
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
 
-            app.Contacts.Modify(0, contactnewData);
-
+            app.Contacts.Modify(2, contactnewData);
+            Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
+            
             List<ContactData> newContacts = app.Contacts.GetContactList();
            
-            oldContacts[0].Surname = contactnewData.Surname;
-            oldContacts[0].Name = contactnewData.Name;
+            oldContacts[2].Surname = contactnewData.Surname;
+            oldContacts[2].Name = contactnewData.Name;
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
             Trace.WriteLine("old counts count: " + oldContacts, "new contacts count: " + newContacts);
         }
-
         
     }
 }
