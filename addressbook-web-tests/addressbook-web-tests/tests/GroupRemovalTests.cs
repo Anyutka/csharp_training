@@ -23,13 +23,20 @@ namespace WebAddressbookTests
 
             app.Groups.VerifyGroupPresent(group);
             List<GroupData> oldGroups = app.Groups.GetGroupList();
+           
             app.Groups.Remove(0);
             Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
             List<GroupData> newGroups = app.Groups.GetGroupList();
 
+            GroupData toBeRemoved = oldGroups[0];
             oldGroups.RemoveAt(0);
 
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData groupp in newGroups) 
+            {
+                Assert.AreNotEqual(groupp.Id, toBeRemoved.Id);
+            }
             Trace.WriteLine("old groups count: " + oldGroups, "new groups count: " + newGroups);
         }    
     }

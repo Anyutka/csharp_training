@@ -159,7 +159,7 @@ namespace WebAddressbookTests
         }
         public ContactHelper InitContactModification(int index)
         {
-            driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[" + (index+1) + "]/td[8]/a/img")).Click();
+            driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[" + (index+2) + "]/td[8]/a/img")).Click();
             
             return this;
         }
@@ -182,10 +182,14 @@ namespace WebAddressbookTests
                     {
                         string name = cells[2].Text;
                         string surname = cells[1].Text;
-                        ContactData contact = new ContactData();
-                        contact.Name = name;
+                        string id = row.FindElement(By.TagName("input")).GetAttribute("value");
+
+                        ContactData contact = new ContactData(); // объект , contact - то как обращаюсь к объекту
+                        contact.Name = name; // присвоила данные объекта?
                         contact.Surname = surname;
+                        contact.Id = id;
                         contactCache.Add(contact);
+                        
                     }
                 }
             }

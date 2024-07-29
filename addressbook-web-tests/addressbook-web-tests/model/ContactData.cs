@@ -11,6 +11,7 @@ namespace WebAddressbookTests
 
         public ContactData()
         {
+
         }
         
         public bool Equals(ContactData other)
