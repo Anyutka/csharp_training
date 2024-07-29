@@ -33,8 +33,8 @@ namespace WebAddressbookTests
         public ContactHelper Modify(int v, ContactData contactnewData)
         {
             manager.Contacts.
-            //SelectContact();
-            InitContactModification();
+            
+            InitContactModification(v);
             System.Threading.Thread.Sleep(3000);
             EnterContactData(contactnewData);
             SelectContactDates();
@@ -61,7 +61,7 @@ namespace WebAddressbookTests
         public ContactHelper Remove(int v)
         {
             manager.Contacts.
-            SelectContact();
+            SelectContact(v);
             RemoveContact();
             System.Threading.Thread.Sleep(3000);
             return this;
@@ -138,11 +138,11 @@ namespace WebAddressbookTests
             driver.FindElement(By.LinkText("home page")).Click();
             return this;
         }
-        public ContactHelper SelectContact()
+        public ContactHelper SelectContact(int index)
         {
             driver.FindElement(By.LinkText("home")).Click();
             driver.FindElement
-    (By.XPath("/html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input")).Click();
+    (By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
             return this;
         }
         public ContactHelper RemoveContact()
@@ -157,10 +157,10 @@ namespace WebAddressbookTests
             contactCache = null;
             return this;
         }
-        public ContactHelper InitContactModification()
+        public ContactHelper InitContactModification(int index)
         {
-            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[4]/td[8]/a/img")).Click();
-           // driver.FindElement(By.XPath("//img[@alt='Edit']")).Click();
+            driver.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[" + (index+1) + "]/td[8]/a/img")).Click();
+            
             return this;
         }
 
@@ -194,7 +194,7 @@ namespace WebAddressbookTests
 
         public int GetContactCount()
         {
-            //return driver.FindElements(By.TagName("tr")).Count; 
+             
             IList<IWebElement> rows = driver.FindElements(By.TagName("tr"));
             int count = 0;
             foreach (IWebElement row in rows)

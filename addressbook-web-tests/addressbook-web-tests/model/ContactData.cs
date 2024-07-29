@@ -7,24 +7,7 @@ using System.Threading.Tasks;
 namespace WebAddressbookTests
 {
    public class ContactData : IEquatable<ContactData>, IComparable<ContactData> 
-    {
-        
-        public string Name ="";
-        public string Middle =""; // без get set 
-        public string Surname = "";
-        private string nickname = "";
-        private string title = "";
-        private string company = "";
-        private string address = "";
-        private string telhome = "";
-        private string telmobile = "";
-        private string telwork = "";
-        private string telfax = "";
-        private string email = "";
-        private string email2 = "";
-        private string email3 = "";
-        private string homepage = "";
-        
+    {               
 
         public ContactData()
         {
@@ -71,140 +54,37 @@ namespace WebAddressbookTests
             }           
                          
         }
-        public string Nickname
-        {
-            get
-            {
-                return nickname; //возвращает
-            }
-            set
-            {
-                nickname = value; //присваивает
-            }
-        }
+        public string Name { get; set; }
 
-        public string Title
-        {
-            get
-            {
-                return title; //возвращает
-            }
-            set
-            {
-                title = value; //присваивает
-            }
-        }
-        public string Company
-        {
-            get
-            {
-                return company; //возвращает
-            }
-            set
-            {
-                company = value; //присваивает
-            }
-        }
+        public string Middle { get; set; }
 
-        public string Address
-        {
-            get
-            {
-                return address; //возвращает
-            }
-            set
-            {
-                address = value; //присваивает
-            }
-        }
-        public string Telhome
-        {
-            get
-            {
-                return telhome; //возвращает
-            }
-            set
-            {
-                telhome = value; //присваивает
-            }
-        }
-        public string Telmobile
-        {
-            get
-            {
-                return telmobile; //возвращает
-            }
-            set
-            {
-                telmobile = value; //присваивает
-            }
-        }
-        public string Telwork
-        {
-            get
-            {
-                return telwork; //возвращает
-            }
-            set
-            {
-                telwork = value; //присваивает
-            }
-        }
-        public string Telfax
-        {
-            get
-            {
-                return telfax; //возвращает
-            }
-            set
-            {
-                telfax = value; //присваивает
-            }
-        }
-        public string Email
-        {
-            get
-            {
-                return email; //возвращает
-            }
-            set
-            {
-                email = value; //присваивает
-            }
-        }
-        public string Email2
-        {
-            get
-            {
-                return email2; //возвращает
-            }
-            set
-            {
-                email2 = value; //присваивает
-            }
-        }
-        public string Email3
-        {
-            get
-            {
-                return email3; //возвращает
-            }
-            set
-            {
-                email3 = value; //присваивает
-            }
-        }
-        public string Homepage
-        {
-            get
-            {
-                return homepage; //возвращает
-            }
-            set
-            {
-                homepage = value; //присваивает
-            }
-        }
+        public string Surname { get; set; }
+        public string Nickname { get; set; }
+        
+
+        public string Title { get; set; }
+       
+        public string Company { get; set; }
+        
+
+        public string Address { get; set; }
+        
+        public string Telhome { get; set; }
+       
+        public string Telmobile { get; set; }
+        
+        public string Telwork { get; set; }
+        
+        public string Telfax { get; set; }
+        
+        public string Email { get; set; }
+        
+        public string Email2 { get; set; }
+        
+        public string Email3 { get; set; }
+        
+        public string Homepage { get; set; }
+        public string Id { get; set; }
 
     }
     }

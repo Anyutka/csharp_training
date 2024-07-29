@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace WebAddressbookTests
 {
-    public class GroupData : IEquatable<GroupData>, IComparable<GroupData> 
+    public class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
-        private string name;
-        private string header = "";
-        private string footer = "";
+       
         public GroupData(string name)
         {
-            this.name = name;
+            Name = name;
         }
         public bool Equals(GroupData other)
         {
@@ -26,8 +24,8 @@ namespace WebAddressbookTests
             {
                 return true;
             }
-         return Name == other.Name;
-        
+            return Name == other.Name;
+
         }
         public override int GetHashCode()
 
@@ -36,7 +34,7 @@ namespace WebAddressbookTests
         }
         public override string ToString()
         {
-            return "name=" +Name;
+            return "name=" + Name;
         }
         public int CompareTo(GroupData other)
         {
@@ -47,38 +45,12 @@ namespace WebAddressbookTests
             return Name.CompareTo(other.Name);
         }
 
-        public string Name
-        {
-            get
-            {
-                return name; //возвращает
-            }
-            set
-            {
-                name = value; //присваивает
-            }
-        }
-        public string Header
-        {
-            get
-            {
-                return header; //возвращает
-            }
-            set
-            {
-                header=value; //присваивает
-            }
-        }
-        public string Footer
-        {
-            get
-            {
-                return footer; //возвращает
-            }
-            set
-            {
-                footer=value; //присваивает
-            }
-        }
+        public string Name { get; set; }
+
+        public string Header { get; set; }
+
+        public string Footer { get; set; }
+
+        public string Id { get; set; }
     }
 }
