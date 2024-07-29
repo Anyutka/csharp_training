@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using OpenQA.Selenium.DevTools.V123.FedCm;
 
 namespace WebAddressbookTests
 {
@@ -42,7 +43,8 @@ namespace WebAddressbookTests
             app.Contacts.VerifyContactPresent(contact);
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
-
+            ContactData oldData = oldContacts[3];
+            
             app.Contacts.Modify(3, contactnewData);
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
             
@@ -53,6 +55,15 @@ namespace WebAddressbookTests
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contactt in newContacts)
+            {
+                if (contactt.Id == oldData.Id)
+                {
+                    Assert.AreEqual(contactnewData.Surname, contactt.Surname);
+                    Assert.AreEqual(contactnewData.Name, contactt.Name);
+                }
+            }
             Trace.WriteLine("old counts count: " + oldContacts, "new contacts count: " + newContacts);
         }
         

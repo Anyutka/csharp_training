@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -30,8 +31,17 @@ namespace WebAddressbookTests
 
             List<ContactData> newContacts = app.Contacts.GetContactList();
 
+            ContactData toBeRemoved = oldContacts[3];
             oldContacts.RemoveAt(3);
             Assert.AreEqual(oldContacts, newContacts);
+
+            
+            foreach (ContactData contactt in newContacts)
+            {
+                Assert.AreNotEqual(contactt.Id, toBeRemoved.Id);
+            }
+            
+
             Trace.WriteLine("old contacts count: " + oldContacts,
                 "new contacts count: " + newContacts);
 
