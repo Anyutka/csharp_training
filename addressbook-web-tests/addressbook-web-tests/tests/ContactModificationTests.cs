@@ -17,24 +17,24 @@ namespace WebAddressbookTests
         [Test]
         public void ContactModificationTest()
         {
-            ContactData contact = new ContactData();
-            contact.Name = "Bulldog";
+            ContactData contact = new ContactData("Bulldog", "Non-sporting dog");
+            //contact.Name = "Bulldog";
             contact.Middle = "English";
-            contact.Surname = "Non-sporting dog";
+            //contact.Surname = "Non-sporting dog";
             contact.Nickname = "bulyk";
 
-            ContactData contactnewData = new ContactData();
-            contactnewData.Name = "Labrador";
+            ContactData contactnewData = new ContactData("Labrador", "Sporting");
+            //contactnewData.Name = "Labrador";
             contactnewData.Middle = null;
-            contactnewData.Surname = "Sporting";
+           // contactnewData.Surname = "Sporting";
             contactnewData.Nickname = "pointic";
             contactnewData.Title = "At office";
             contactnewData.Company = "Dog-Shorthaired";
             contactnewData.Address = "Bushes street 5-11";
-            contactnewData.Telhome = "4444444";
-            contactnewData.Telmobile = "9999999";
-            contactnewData.Telwork = "7777777";
-            contactnewData.Telfax = "6666666";
+            contactnewData.TelHome = "4444444";
+            contactnewData.TelMobile = "9999999";
+            contactnewData.TelWork = "7777777";
+            contactnewData.TelFax = "6666666";
             contactnewData.Email = "pointic@dogik.com";
             contactnewData.Email2 = "pointic1@dogik.com";
             contactnewData.Email3 = "pointic2@dogik.com";

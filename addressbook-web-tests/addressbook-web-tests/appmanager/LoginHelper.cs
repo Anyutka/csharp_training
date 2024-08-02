@@ -48,8 +48,17 @@ namespace WebAddressbookTests
         public bool IsLoggedIn(AccountData account)
         {
             return IsLoggedIn()
-            && driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).
-            Text ==("(" + account.Username + ")");
+            && GetLoggetUserName() == account.Username; // возвращает имя пользов. кот. сейчас залогин
+            
+            //хотим построить строку кот. представляет собой некоторое значение в круглых скобках
+        }
+
+        private string GetLoggetUserName()
+        {
+            string text = driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).
+            Text;
+            return text.Substring(1, text.Length - 2); //извлечь на 2 символа меньше чем длина строки
+            //в этом случае у нас отрежется первый и последний символ
         }
     }
 }

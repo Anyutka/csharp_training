@@ -17,18 +17,18 @@ namespace WebAddressbookTests
         [Test]
         public void ContactCreationTest()
         {
-            ContactData contact = new ContactData();
-            contact.Name = "Bulldog";
+            ContactData contact = new ContactData("Bulldog", "Non-sporting dog");
+            //contact.Name = ;
             contact.Middle = "English";
-            contact.Surname = "Non-sporting dog";
+            //contact.Surname =;
             contact.Nickname = "bulyk";
             contact.Title = "At home";
             contact.Company = "Dog-bulldog";
             contact.Address = "Trees street 5-11";
-            contact.Telhome = "555555";
-            contact.Telmobile = "1111111";
-            contact.Telwork = "2222222";
-            contact.Telfax = "3333333";
+            contact.TelHome = "555555";
+            contact.TelMobile = "1111111";
+            contact.TelWork = "2222222";
+            contact.TelFax = "3333333";
             contact.Email = "bulyk@dogik.com";
             contact.Email2 = "bulyk1@dogik.com";
             contact.Email3 = "bulyk2@dogik.com";
@@ -55,18 +55,18 @@ namespace WebAddressbookTests
         public void EmptyContactCreatinonTest()
         {
             
-            ContactData contact = new ContactData();
-            contact.Name = "";
+            ContactData contact = new ContactData("", "");
+            //contact.Name = "";
             contact.Middle = "";
-            contact.Surname = "";
+            //contact.Surname = "";
             contact.Nickname = "";
             contact.Title = "";
             contact.Company = "";
             contact.Address = "";
-            contact.Telhome = "";
-            contact.Telmobile = "";
-            contact.Telwork = "";
-            contact.Telfax = "";
+            contact.TelHome = "";
+            contact.TelMobile = "";
+            contact.TelWork = "";
+            contact.TelFax = "";
             contact.Email = "";
             contact.Email2 = "";
             contact.Email3 = "";
@@ -89,18 +89,18 @@ namespace WebAddressbookTests
         [Test]
         public void BadNameContactCreationTest()
         {
-            ContactData contact = new ContactData();
-            contact.Name = "a'''a";
+            ContactData contact = new ContactData("a'''a", "Non-sporting dog");
+            //contact.Name = "a'''a";
             contact.Middle = "English";
-            contact.Surname = "Non-sporting dog";
+           // contact.Surname = "Non-sporting dog";
             contact.Nickname = "bulyk";
             contact.Title = "At home";
             contact.Company = "Dog-bulldog";
             contact.Address = "Trees street 5-11";
-            contact.Telhome = "555555";
-            contact.Telmobile = "1111111";
-            contact.Telwork = "2222222";
-            contact.Telfax = "3333333";
+            contact.TelHome = "555555";
+            contact.TelMobile = "1111111";
+            contact.TelWork = "2222222";
+            contact.TelFax = "3333333";
             contact.Email = "bulyk@dogik.com";
             contact.Email2 = "bulyk1@dogik.com";
             contact.Email3 = "bulyk2@dogik.com";

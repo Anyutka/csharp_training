@@ -17,10 +17,10 @@ namespace WebAddressbookTests
         [Test]
         public void ContactRemovalTest()
         {
-            ContactData contact = new ContactData();
-            contact.Name = "Bulldog";
+            ContactData contact = new ContactData("Bulldog", "Non-sporting dog");
+            //contact.Name = "Bulldog";
             contact.Middle = "English";
-            contact.Surname = "Non-sporting dog";
+            //contact.Surname = "Non-sporting dog";
             contact.Nickname = "bulyk";
             app.Contacts.VerifyContactPresent(contact);
 
