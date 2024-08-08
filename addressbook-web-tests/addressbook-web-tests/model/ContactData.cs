@@ -15,12 +15,17 @@ namespace WebAddressbookTests
         private string allDetails;
         private string anniversary;
         private string birthday;
-        
+        private string v;
 
         public ContactData(string firstName, string secondName)
         {
             Name = firstName;
             Surname = secondName;
+        }
+
+        public ContactData(string v)
+        {
+            this.v = v;
         }
 
         public bool Equals(ContactData other)
@@ -45,7 +50,8 @@ namespace WebAddressbookTests
 
         public override string ToString()
         {
-            return "name=" + Name + ", surname=" + Surname;
+            //return "name=" + Name + ", surname=" + Surname;
+            return "name=" + Name + "\n middle= " + Middle + "\nsurname= " + Surname;
         }
         public int CompareTo(ContactData other)
         {

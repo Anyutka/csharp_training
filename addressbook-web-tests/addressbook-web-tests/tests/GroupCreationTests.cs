@@ -12,15 +12,32 @@ namespace WebAddressbookTests
     [TestFixture]
     public class GroupCreationTests : AuthTestBase
     {
+        public static IEnumerable<GroupData> RandomGroupDataProvider()
+        {
+            List<GroupData> groups = new List<GroupData>();
 
-        [Test]
-        public void GroupCreationTest()
+            for (int i = 0;i<5; i++)
+            {
+                groups.Add(new GroupData(GenerateRandomString(15))
+                {
+                    Header = GenerateRandomString(30),
+                    Footer = GenerateRandomString(30)
+                });
+            }
+            groups.Add(new GroupData("")
+            {
+                Header = "",
+                Footer = ""
+            });
+
+            return groups;
+        }
+
+        [Test, TestCaseSource("RandomGroupDataProvider")]
+        
+        public void GroupCreationTest(GroupData group)
         {           
-            
-            GroupData group = new GroupData("aaa");
-            group.Header = "ddd";
-            group.Footer = "fff";            
-
+             
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
             app.Groups.Create(group);            
@@ -36,27 +53,8 @@ namespace WebAddressbookTests
            Assert.AreEqual(oldGroups, newGroups);
            Trace.WriteLine("old groups count: " + oldGroups, "new groups count: " + newGroups);
         }
-        [Test]
-        public void EmptyGroupCreationTest()
-        {
-            
-            GroupData group = new GroupData("");
-            group.Header = "";
-            group.Footer = "";
-            
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
-
-            app.Groups.Create(group);
-            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
-
-            List<GroupData> newGroups = app.Groups.GetGroupList();
-
-            oldGroups.Add(group);
-            oldGroups.Sort();
-            newGroups.Sort();
-            Assert.AreEqual(oldGroups, newGroups);
-            Trace.WriteLine("old groups count: " + oldGroups, "new groups count: " + newGroups);
-        }
+        
+        
         [Test]
         public void BadNameGroupCreationTest()
         {
