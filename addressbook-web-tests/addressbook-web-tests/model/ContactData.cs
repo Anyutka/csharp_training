@@ -293,18 +293,16 @@ namespace WebAddressbookTests
                 result += $"\r\nHomepage:\r\n{Homepage.Replace("http://", "")}";
             }
 
-            if (!string.IsNullOrEmpty(Birthday) ||
-                !string.IsNullOrEmpty(Anniversary))
-                
+            if (HasBirthday || HasAnniversary)                
             {
                 result += "\r\n";
             }
 
-            if (!string.IsNullOrEmpty(Birthday))
+            if (HasBirthday)
             {
                 result += $"\r\nBirthday {Birthday} (3)";
             }
-            if (!string.IsNullOrEmpty(Anniversary))
+            if (HasAnniversary)
             {
                 result += $"\r\nAnniversary {Anniversary} (2)";
             }
@@ -315,6 +313,7 @@ namespace WebAddressbookTests
             // "1Labrador English Sporting\r\npointic\r\nAt office\r\nDog-Shorthaired\r\nBushes street 5-11\r\n\r\nH: 4444444\r\nM: 9999999\r\nW: 7777777\r\nF: 6666666\r\n\r\npointic@dogik.com\r\npointic1@dogik.com\r\npointic2@dogik.com\r\nHomepage:\r\nall.pointers.com\r\n\r\nBirthday 14. September 2021 (2)\r\nAnniversary 11. July 2022 (2)"
            // return $"{names}\r\n{Nickname}\r\n{Title}\r\n{Company}\r\n{Address}\r\n\r\nH: {TelHome}\r\nM: {TelMobile}\r\nW: {TelWork}\r\nF: {TelFax}\r\n\r\n{Email}\r\n{Email2}\r\n{Email3}\r\nHomepage:\r\n{Homepage.Replace("http://","")}\r\n\r\nBirthday {Birthday} (2)\r\nAnniversary {Anniversary} (2)";
         }
-               
+        bool HasBirthday => !string.IsNullOrEmpty(Birthday) && Birthday != "0. - ";
+        bool HasAnniversary => !string.IsNullOrEmpty(Anniversary) && Anniversary != "0. - ";
     }
 }
