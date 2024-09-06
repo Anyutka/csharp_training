@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfContactData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ContactData>
+    <Name>s</Name>
+    <Surname>AoSO</Surname>
+    <Birthday>.  </Birthday>
+    <Anniversary>.  </Anniversary>
+    <AllPhones />
+    <AllEmails />
+    <AllDetails>s AoSO
+
+Birthday .   (3)
+Anniversary .   (2)</AllDetails>
+  </ContactData>
+  <ContactData>
+    <Name>FKmfenTNC</Name>
+    <Surname>uT</Surname>
+    <Birthday>.  </Birthday>
+    <Anniversary>.  </Anniversary>
+    <AllPhones />
+    <AllEmails />
+    <AllDetails>FKmfenTNC uT
+
+Birthday .   (3)
+Anniversary .   (2)</AllDetails>
+  </ContactData>
+</ArrayOfContactData>

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("addressbook-test-data-generators")]
+[assembly: AssemblyTitle("addressbook-contact-test-data-generators")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("addressbook-test-data-generators")]
+[assembly: AssemblyProduct("addressbook-contact-test-data-generators")]
 [assembly: AssemblyCopyright("Copyright ©  2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("1c048321-0fec-43e7-8db8-ce6a1e3263f4")]
+[assembly: Guid("a58e6ebd-4eef-4499-82ac-783a370268e4")]
 
 // Version information for an assembly consists of the following four values:
 //

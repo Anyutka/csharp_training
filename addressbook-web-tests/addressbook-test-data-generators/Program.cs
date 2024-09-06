@@ -2,104 +2,45 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Serialization;
-using Newtonsoft.Json;
-using WebAddressbookTests;
-using Excel = Microsoft.Office.Interop.Excel;
-
 
 namespace addressbook_test_data_generators
 {
-     class Program
+    class Program
     {
         static void Main(string[] args)
         {
-            int count = Convert.ToInt32(args[0]);
-            
-            string filename = args[1];
-            string format = args[2];
-                      
-            List<GroupData> groups = new List<GroupData>();
-            for (int i = 0; i < count; i++)
+            string type = args[0];
+            int count = Convert.ToInt32(args[1]);
+            StreamWriter writer = new StreamWriter(args[2]);
+            string format = args[3];
+
+            if (type == "groups")
             {
-                groups.Add(new GroupData(TestBase.GenerateRandomString(10))
-                {
-                    Header = TestBase.GenerateRandomString(10),
-                    Footer = TestBase.GenerateRandomString(10),
-                });              
+                System.Diagnostics.Process p = new System.Diagnostics.Process();
+                p.StartInfo.FileName = @"c:\Users\Anya\source\repos\Anyutka\csharp_training
+                                      \addressbook-web-tests\addressbook-group-test-data-generators
+                                       \bin\Debug\addressbook-group-test-data-generators.exe";
+                p.Start();
             }
-            if (format == "excel")
+
+            else if (type == "contacts")
+
             {
-                writeGroupsToExcelFile(groups, filename);
+
+                System.Diagnostics.Process p = new System.Diagnostics.Process();
+                p.StartInfo.FileName = @"c:\Users\Anya\source\repos\Anyutka\csharp_training
+                                      \addressbook-web-tests\addressbook-contact-test-data-generators
+                                       \bin\Debug\addressbook_contact-test_data_generators.exe";
+                p.Start();
+                
             }
             else
             {
-                StreamWriter writer = new StreamWriter(filename);
-                if (format == "csv")
-                {
-                    writeGroupsToCsvFile(groups, writer);
-                }
-                else if (format == "xml")
-                {
-                    writeGroupsToXmlFile(groups, writer);
-                }
-                else if (format == "json")
-                {
-                    writeGroupsToJsonFile(groups, writer);
-                }
-                else
-                {
-                    System.Console.Out.Write("Unrecognized format" + format);
-                }
-                writer.Close();
+                System.Console.Out.Write("Unrecognized format" + format);
             }
-            
-        }
-
-        static void writeGroupsToExcelFile(List<GroupData> groups, string filename)
-        {
-            Excel.Application app = new Excel.Application();
-            app.Visible= true;
-            Excel.Workbook wb = app.Workbooks.Add();    
-            Excel.Worksheet sheet = wb.ActiveSheet;
-            sheet.Cells[1, 1] = "test";
-
-            int row = 1;
-            foreach (GroupData group in groups)
-            {
-                sheet.Cells[row,1] = group.Name;
-                sheet.Cells[row, 2] = group.Header;
-                sheet.Cells[row, 3] = group.Footer;
-                row++;
-            }
-            string fullpath = Path.Combine(Directory.GetCurrentDirectory(), filename);
-            File.Delete(fullpath);
-            wb.SaveAs(fullpath);
-
-            wb.Close();
-            app.Visible = false;
-            app.Quit();
-        }
-
-        static void writeGroupsToCsvFile(List<GroupData> groups, StreamWriter writer )
-        {
-            foreach (GroupData group in groups)
-            {
-                writer.WriteLine(String.Format("${0},${1},${2}",
-                    group.Name, group.Header, group.Footer));
-            }
-        }
-        static void writeGroupsToXmlFile(List<GroupData> groups, StreamWriter writer)
-        {
-            new XmlSerializer(typeof(List<GroupData>)).Serialize(writer, groups);
-        }
-
-        static void writeGroupsToJsonFile(List<GroupData> groups, StreamWriter writer)
-        {
-            writer.Write(JsonConvert.SerializeObject(groups, Newtonsoft.Json.Formatting.Indented));
         }
     }
 }

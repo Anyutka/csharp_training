@@ -16,13 +16,16 @@ namespace WebAddressbookTests
         private string anniversary;
         private string birthday;
         private string v;
-
+  
         public ContactData(string firstName, string secondName)
         {
             Name = firstName;
             Surname = secondName;
         }
 
+        public ContactData()
+        {   
+        }
         public ContactData(string v)
         {
             this.v = v;
@@ -62,7 +65,8 @@ namespace WebAddressbookTests
 
             if (Surname.Equals(other.Surname))
             {
-                return Name.CompareTo(other.Name);
+                
+                return string.Compare( Name, other.Name);
             }
             else
             {
@@ -70,6 +74,7 @@ namespace WebAddressbookTests
             }
 
         }
+        
         public string Name { get; set; }
 
         public string Middle { get; set; }
