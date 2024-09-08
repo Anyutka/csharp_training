@@ -20,9 +20,10 @@ namespace addressbook_test_data_generators
             if (type == "groups")
             {
                 System.Diagnostics.Process p = new System.Diagnostics.Process();
-                p.StartInfo.FileName = @"c:\Users\Anya\source\repos\Anyutka\csharp_training
-                                      \addressbook-web-tests\addressbook-group-test-data-generators
-                                       \bin\Debug\addressbook-group-test-data-generators.exe";
+                p.StartInfo.FileName = @"c:\Users\Anya\source\repos\Anyutka\csharp_training"+
+                                      @"\addressbook-web-tests\addressbook-group-test-data-generators"+
+                                       @"\bin\Debug\addressbook-group-test-data-generators.exe";
+                p.StartInfo.Arguments = string.Join(" ", args.Skip(1));
                 p.Start();
             }
 
@@ -31,9 +32,10 @@ namespace addressbook_test_data_generators
             {
 
                 System.Diagnostics.Process p = new System.Diagnostics.Process();
-                p.StartInfo.FileName = @"c:\Users\Anya\source\repos\Anyutka\csharp_training
-                                      \addressbook-web-tests\addressbook-contact-test-data-generators
-                                       \bin\Debug\addressbook_contact-test_data_generators.exe";
+                p.StartInfo.FileName = @"c:\Users\Anya\source\repos\Anyutka\csharp_training"+
+                                      @"\addressbook-web-tests\addressbook-contact-test-data-generators"+
+                                      @"\bin\Debug\addressbook_contact-test_data_generators.exe";
+                p.StartInfo.Arguments = string.Join(" ", args.Skip(1));
                 p.Start();
                 
             }
