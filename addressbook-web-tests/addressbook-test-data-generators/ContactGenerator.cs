@@ -10,16 +10,15 @@ using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace addressbook_contact_test_data_generators
+namespace addressbook_test_data_generators
 {
-    class ContactProgram
+    class ContactGenerator
     {
-        static void Main(string[] args)
+        public static void Generate(string[] args)
         {
-            string type = args[0];
-            int count= Convert.ToInt32(args[1]);          
-            StreamWriter writer = new StreamWriter(args[2]);
-            string format = args[3];
+            int count= Convert.ToInt32(args[0]);          
+            StreamWriter writer = new StreamWriter(args[1]);
+            string format = args[2];
 
             List<ContactData> contacts = new List<ContactData>();
             for (int i = 0; i < count; i++)

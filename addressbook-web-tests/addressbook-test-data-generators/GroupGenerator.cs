@@ -13,12 +13,11 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace addressbook_test_data_generators
 {
-     class Program
+     class GroupGenerator
     {
-        static void Main(string[] args)
+        public static void Generate(string[] args)
         {
             int count = Convert.ToInt32(args[0]);
-            
             string filename = args[1];
             string format = args[2];
                       
