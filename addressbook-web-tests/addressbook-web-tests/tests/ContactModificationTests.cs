@@ -12,7 +12,7 @@ using OpenQA.Selenium.DevTools.V123.FedCm;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactModificationTests : AuthTestBase
+    public class ContactModificationTests : ContactTestBase
     {
         [Test]
         public void ContactModificationTest()
@@ -42,23 +42,27 @@ namespace WebAddressbookTests
             
             app.Contacts.VerifyContactPresent(contact);
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
-            ContactData oldData = oldContacts[3];
+            List<ContactData> oldContacts = ContactData.GetAll();
+
+            ContactData toBeModified = oldContacts[0];
+
+            ContactData oldData = toBeModified;
             
-            app.Contacts.Modify(3, contactnewData);
+            app.Contacts.Modify(toBeModified, contactnewData);
+
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
             
-            List<ContactData> newContacts = app.Contacts.GetContactList();
-           
-            oldContacts[3].Surname = contactnewData.Surname;
-            oldContacts[3].Name = contactnewData.Name;
+            List<ContactData> newContacts = ContactData.GetAll();
+
+            toBeModified.Surname = contactnewData.Surname;
+            toBeModified.Name = contactnewData.Name;
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
 
             foreach (ContactData contactt in newContacts)
             {
-                if (contactt.Id == oldData.Id)
+                if (contactt.Id == toBeModified.Id)
                 {
                     Assert.AreEqual(contactnewData.Surname, contactt.Surname);
                     Assert.AreEqual(contactnewData.Name, contactt.Name);

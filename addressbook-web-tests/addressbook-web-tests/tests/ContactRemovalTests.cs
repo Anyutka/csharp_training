@@ -11,7 +11,7 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactRemovalTests : AuthTestBase
+    public class ContactRemovalTests : ContactTestBase
     {
         
         [Test]
@@ -24,15 +24,16 @@ namespace WebAddressbookTests
             contact.Nickname = "bulyk";
             app.Contacts.VerifyContactPresent(contact);
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
+            ContactData toBeRemoved = oldContacts[1];
 
-            app.Contacts.Remove(3);
+            app.Contacts.Remove(toBeRemoved);
             Assert.AreEqual(oldContacts.Count - 1, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
 
-            ContactData toBeRemoved = oldContacts[3];
-            oldContacts.RemoveAt(3);
+            
+            oldContacts.RemoveAt(1);
             Assert.AreEqual(oldContacts, newContacts);
 
             
@@ -41,10 +42,8 @@ namespace WebAddressbookTests
                 Assert.AreNotEqual(contactt.Id, toBeRemoved.Id);
             }
             
-
             Trace.WriteLine("old contacts count: " + oldContacts,
                 "new contacts count: " + newContacts);
-
         }
 
     }

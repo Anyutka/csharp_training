@@ -13,7 +13,10 @@ namespace WebAddressbookTests
 {
     public class TestBase
     {
+       public static bool PERFORM_LONG_UI_CHECKS= true;
+
         protected ApplicationManager app;
+        
         static string letters = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
         [SetUp]
         public void SetupApplicationManager()

@@ -10,13 +10,14 @@ using System.Xml;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Linq;
 
 
 
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupCreationTests : AuthTestBase
+    public class GroupCreationTests : GroupTestBase
     {
         public static IEnumerable<GroupData> RandomGroupDataProvider()
         {
@@ -97,14 +98,14 @@ namespace WebAddressbookTests
         public void GroupCreationTest(GroupData group)
         {           
              
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
 
             app.Groups.Create(group);            
             
            
             Assert.AreEqual(oldGroups.Count +1, app.Groups.GetGroupCount());
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();
 
             oldGroups.Add(group);
             oldGroups.Sort();
@@ -134,6 +135,21 @@ namespace WebAddressbookTests
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
             Trace.WriteLine("old groups count: " + oldGroups, "new groups count: " + newGroups);
+        }
+        [Test]
+        public void TestDBConnectivity()
+        {
+            DateTime start = DateTime.Now;
+            List<GroupData> fromUi=app.Groups.GetGroupList();
+            DateTime end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(start));
+
+            start = DateTime.Now;
+
+            List<GroupData> fromDb = GroupData.GetAll();
+
+            end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(start));
         }
     }
     }
