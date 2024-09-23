@@ -91,6 +91,7 @@ namespace WebAddressbookTests
             return this;
 
         }
+
         public ContactHelper AddNewContact()
         {
             driver.FindElement(By.LinkText("add new")).Click();
@@ -172,6 +173,12 @@ namespace WebAddressbookTests
             return this;
         }
 
+        //select contacts while adding contact to group 
+        private void SelectContact2(string contactId)
+        {
+            driver.FindElement(By.Id(contactId)).Click();           
+        }
+
         public ContactHelper RemoveContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
@@ -210,8 +217,7 @@ namespace WebAddressbookTests
                 }
             }
 
-            return this;
-           
+            return this;           
         }
 
         private List<ContactData> contactCache = null;
@@ -262,6 +268,23 @@ namespace WebAddressbookTests
             return count;
         }
 
+        public int GetContactCountInGroup()
+        {
+            GroupData group = GroupData.GetAll()[25];
+            IList<IWebElement> rows = driver.FindElements(By.TagName("tr"));
+            int count = 0;
+            foreach (IWebElement row in rows)
+            {
+                IList<IWebElement> cells = row.FindElements(By.TagName("td"));
+                if (cells.Count > 0)
+                {
+                    count = count + 1;
+                }
+            }
+
+            return count;
+        }
+
         public ContactData GetContactInformationFromTable(int index)
         {
             manager.Navigator.GoToHomePage();
@@ -274,14 +297,12 @@ namespace WebAddressbookTests
             string allPhones = cells[5].Text;
             string allEmails = cells[4].Text;
 
-
             return new ContactData(firstName, secondName)
             {
                 Address = address,
                 AllPhones= allPhones,
                 AllEmails = allEmails                
             };
-
         }
 
         public ContactData GetContactInformationFromEditForm(int index)
@@ -343,7 +364,6 @@ namespace WebAddressbookTests
                 ADay = aDay,
                 AMonth = aMonth,
                 AYear = aYear
-
     };            
         }
 
@@ -365,7 +385,52 @@ namespace WebAddressbookTests
             {
                 AllDetails = details.Text
             };
+        }
 
+        public void AddContactToGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.GoToHomePage();
+            ClearGroupFilter();
+            SelectContact(contact.Id);
+            SelectGroupToAdd(group.Name);
+            CommitAddingContactToGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        public void DeleteContactFromGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectGroupForFilter(group.Name);
+            SelectContact(contact.Id);
+            RemoveFromGroup();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+                .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        public void RemoveFromGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+        }
+
+        public void SelectGroupForFilter(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("0tXBG32G");
+        }
+
+        public void CommitAddingContactToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+        }
+
+        public void SelectGroupToAdd(string name)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(name);
+        }
+
+        public void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
         }
 
         

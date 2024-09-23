@@ -11,6 +11,7 @@ using System.Xml.Serialization;
 using Newtonsoft.Json;
 using Excel = Microsoft.Office.Interop.Excel;
 using System.Linq;
+using System.Security.Cryptography;
 
 
 
@@ -23,7 +24,7 @@ namespace WebAddressbookTests
         {
             List<GroupData> groups = new List<GroupData>();
 
-            for (int i = 0;i<5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 groups.Add(new GroupData(GenerateRandomString(15))
                 {
@@ -43,7 +44,7 @@ namespace WebAddressbookTests
         public static IEnumerable<GroupData> GroupDataFromCsvFile()
         {
             List<GroupData> groups = new List<GroupData>();
-            string[] lines =File.ReadAllLines(@"groups.csv");
+            string[] lines = File.ReadAllLines(@"groups.csv");
             foreach (string l in lines)
             {
                 string[] parts = l.Split(',');
@@ -58,10 +59,10 @@ namespace WebAddressbookTests
 
         public static IEnumerable<GroupData> GroupDataFromXmlFile()
         {
-            
-            return (List<GroupData>) new XmlSerializer(typeof(List<GroupData>))
+
+            return (List<GroupData>)new XmlSerializer(typeof(List<GroupData>))
                 .Deserialize(new StreamReader(@"groups.xml"));
-            
+
         }
 
         public static IEnumerable<GroupData> GroupDataFromJsonFile()
@@ -69,17 +70,17 @@ namespace WebAddressbookTests
             return JsonConvert.DeserializeObject<List<GroupData>>(
                  File.ReadAllText(@"groups.json"));
         }
-        
+
 
         public static IEnumerable<GroupData> GroupDataFromExcelFile()
         {
-            List<GroupData> groups=new List<GroupData>();
+            List<GroupData> groups = new List<GroupData>();
             Excel.Application app = new Excel.Application();
-            Excel.Workbook wb 
+            Excel.Workbook wb
                 = app.Workbooks.Open(Path.Combine(Directory.GetCurrentDirectory(), @"groups.xlsx"));
             Excel.Worksheet sheet = wb.ActiveSheet;
-            Excel.Range range =sheet.UsedRange;
-            for (int i =1; i<=range.Rows.Count; i++)
+            Excel.Range range = sheet.UsedRange;
+            for (int i = 1; i <= range.Rows.Count; i++)
             {
                 groups.Add(new GroupData()
                 {
@@ -96,25 +97,25 @@ namespace WebAddressbookTests
 
         [Test, TestCaseSource("GroupDataFromExcelFile")]
         public void GroupCreationTest(GroupData group)
-        {           
-             
+        {
+
             List<GroupData> oldGroups = GroupData.GetAll();
 
-            app.Groups.Create(group);            
-            
-           
-            Assert.AreEqual(oldGroups.Count +1, app.Groups.GetGroupCount());
+            app.Groups.Create(group);
+
+
+            Assert.AreEqual(oldGroups.Count + 1, app.Groups.GetGroupCount());
 
             List<GroupData> newGroups = GroupData.GetAll();
 
             oldGroups.Add(group);
             oldGroups.Sort();
             newGroups.Sort();
-           Assert.AreEqual(oldGroups, newGroups);
-           Trace.WriteLine("old groups count: " + oldGroups, "new groups count: " + newGroups);
+            Assert.AreEqual(oldGroups, newGroups);
+            Trace.WriteLine("old groups count: " + oldGroups, "new groups count: " + newGroups);
         }
-        
-        
+
+
         [Test]
         public void BadNameGroupCreationTest()
         {
@@ -122,7 +123,7 @@ namespace WebAddressbookTests
             GroupData group = new GroupData("a'a");
             group.Header = "";
             group.Footer = "";
-            
+
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
             app.Groups.Create(group);
@@ -140,7 +141,7 @@ namespace WebAddressbookTests
         public void TestDBConnectivity()
         {
             DateTime start = DateTime.Now;
-            List<GroupData> fromUi=app.Groups.GetGroupList();
+            List<GroupData> fromUi = app.Groups.GetGroupList();
             DateTime end = DateTime.Now;
             System.Console.Out.WriteLine(end.Subtract(start));
 
@@ -151,6 +152,49 @@ namespace WebAddressbookTests
             end = DateTime.Now;
             System.Console.Out.WriteLine(end.Subtract(start));
         }
+        [Test]
+        public void TestDBConnectivity2()
+        {
+            var allGroups = GroupData.GetAll();
+            foreach (var group in allGroups)
+            {
+                var contacts = group.GetContacts();
+                if (contacts.Count == 0)
+                    continue;
+
+                System.Console.Out.WriteLine("group:" + group.Id + "  " + group.Name);
+
+                foreach (ContactData contact in contacts)
+                {
+                    System.Console.Out.WriteLine("    contact:" + contact.Id + "  " + contact.Name);
+                }
+            }
+        }
+
+        [Test]
+
+        public void TestDBConnectivity3()
+        {
+            // [25] - number group in the DB in order, start to count from 0           
+            foreach (ContactData contact in GroupData.GetAll()[25].GetContacts())
+            {
+                System.Console.Out.WriteLine(contact);
+            }
+        }
+
+        [Test]
+        public void TestDBConnectivity4()
+        {
+
+            foreach (ContactData contact in ContactData.GetAll())
+            {
+                System.Console.Out.WriteLine(contact);
+                //System.Console.Out.WriteLine(contact.Deprecated);
+            }
+        }
     }
-    }
+}
+    
+
+
 

@@ -28,6 +28,7 @@ namespace WebAddressbookTests
             ContactData toBeRemoved = oldContacts[1];
 
             app.Contacts.Remove(toBeRemoved);
+            
             Assert.AreEqual(oldContacts.Count - 1, app.Contacts.GetContactCount());
 
             List<ContactData> newContacts = ContactData.GetAll();
