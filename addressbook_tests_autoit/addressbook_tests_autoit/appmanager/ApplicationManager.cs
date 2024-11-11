@@ -25,9 +25,7 @@ namespace addressbook_tests_autoit
 
         public void Stop()
         {
-            aux.ControlClick(WINTITLE, "", "WindowsForms10.BUTTON.app.0.2c908d510");
-            
-            
+            aux.ControlClick(WINTITLE, "", "WindowsForms10.BUTTON.app.0.2c908d510");                        
         }
 
         public GroupHelper Groups
